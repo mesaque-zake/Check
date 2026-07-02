@@ -1,11 +1,15 @@
-// Função utilitária para aguardar tempo
+// ==========================================
+// 1. UTILITÁRIOS
+// ==========================================
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+// ==========================================
+// 2. COREOGRAFIA DE ABERTURA
+// ==========================================
 async function playOpeningSequence() {
     console.log("1. Maestro posicionado. Preparando a tela...");
     
     try {
-        // Agora sim, manda o Lucide criar os ícones após a tela existir
         lucide.createIcons();
         console.log("2. Ícones renderizados com sucesso.");
 
@@ -88,7 +92,7 @@ async function playOpeningSequence() {
         signature.classList.add('opacity-100');
 
         // FADE OUT
-        console.log("4. Finalizando apresentação e revelando o Sesc Mesa Brasil.");
+        console.log("4. Finalizando apresentação e revelando o sistema.");
         await sleep(1500);
         loader.classList.add('opacity-0');
         
@@ -104,15 +108,9 @@ async function playOpeningSequence() {
     }
 }
 
-// O segredo de ouro: window.onload garante que o HTML e o CSS terminaram de ser lidos
-window.onload = () => {
-    // Dá um pequeno fôlego extra de 100 milissegundos para o navegador se organizar
-    setTimeout(() => {
-        playOpeningSequence();
-        registerServiceWorker();
-    }, 100);
-};
-
+// ==========================================
+// 3. REGISTRO DO SERVICE WORKER
+// ==========================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
@@ -120,3 +118,79 @@ function registerServiceWorker() {
             .catch(err => console.log('Falha no SW: ', err));
     }
 }
+
+// ==========================================
+// 4. LÓGICA DE INSTALAÇÃO DO PWA
+// ==========================================
+let deferredPrompt;
+
+// Captura o evento de instalação do Chrome/Android
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Previne o mini-infobar padrão do mobile de aparecer na hora errada
+    e.preventDefault();
+    // Guarda o evento para dispararmos depois
+    deferredPrompt = e;
+    
+    // Revela o nosso botão flutuante personalizado
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) {
+        installBtn.classList.remove('hidden');
+        // Usamos um pequeno timeout para permitir a transição suave de opacidade
+        setTimeout(() => installBtn.classList.remove('opacity-0', 'translate-y-10'), 50);
+    }
+});
+
+// Função acionada pelo clique no botão de instalar
+window.installPWA = async () => {
+    if (!deferredPrompt) return;
+    
+    // Mostra o prompt nativo
+    deferredPrompt.prompt();
+    
+    // Aguarda a escolha do usuário
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`Escolha de instalação: ${outcome}`);
+    
+    // Limpa a variável e esconde o botão, independente da escolha
+    deferredPrompt = null;
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) {
+        installBtn.classList.add('opacity-0', 'translate-y-10');
+        setTimeout(() => installBtn.classList.add('hidden'), 300);
+    }
+};
+
+// ==========================================
+// 5. DETECÇÃO E AVISO PARA IOS
+// ==========================================
+function checkIOS() {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    // Verifica se já está rodando como PWA instalado
+    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+
+    if (isIOS && !isStandalone) {
+        const iosPrompt = document.getElementById('ios-prompt');
+        if (iosPrompt) {
+            iosPrompt.classList.remove('hidden');
+            setTimeout(() => iosPrompt.classList.remove('opacity-0', 'translate-y-10'), 50);
+            
+            // Esconde automaticamente após 10 segundos para não irritar o usuário
+            setTimeout(() => {
+                iosPrompt.classList.add('opacity-0', 'translate-y-10');
+                setTimeout(() => iosPrompt.classList.add('hidden'), 300);
+            }, 10000);
+        }
+    }
+}
+
+// ==========================================
+// 6. O GATILHO DE INÍCIO (O SEGREDO DE OURO)
+// ==========================================
+// DOMContentLoaded não espera o iframe do Google carregar, apenas o esqueleto HTML
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        playOpeningSequence();
+        registerServiceWorker();
+        checkIOS();
+    }, 100);
+});
