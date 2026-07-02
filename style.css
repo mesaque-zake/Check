@@ -1,35 +1,19 @@
-/* Configuração do deslize fluido dos ícones coloridos */
-.anim-icon {
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* Transição fluida e elástica para os movimentos */
+.actor {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Direções de deslize para formar a "Cruz" de espaço vazio no meio */
-.slide-tl { transform: translate(-80%, -80%); }
-.slide-tr { transform: translate(80%, -80%); }
-.slide-bl { transform: translate(-80%, 80%); }
-.slide-br { transform: translate(80%, 80%); }
-
-/* A física elástica do "Pop" do Check Gigante */
-@keyframes pop-spring {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    60% {
-        transform: scale(1.2); /* Ele cresce 20% a mais do que deveria (o overshoot) */
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1); /* Ele estabiliza no tamanho perfeito */
-        opacity: 1;
-    }
+/* Efeito do Pop no Check (Nasce maior e volta ao tamanho original) */
+.pop-effect {
+    transform: scale(1.15);
+}
+.pop-settle {
+    transform: scale(1);
 }
 
-.animate-pop {
-    animation: pop-spring 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* Utilitário para sumir do DOM no final */
-.hidden-fully {
-    display: none !important;
+/* Efeito de Congelamento Offline */
+.freeze {
+    filter: grayscale(100%) opacity(40%);
+    transform: scale(0.8) !important;
+    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1) !important; /* Movimento lento e dramático */
 }
