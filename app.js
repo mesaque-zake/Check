@@ -1,12 +1,14 @@
-// Renderiza os ícones do Lucide
-lucide.createIcons();
-
-// Função utilitária para aguardar tempo em milissegundos
+// Função utilitária para aguardar tempo
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// Orquestrador da Animação
 async function playOpeningSequence() {
+    console.log("1. Maestro posicionado. Preparando a tela...");
+    
     try {
+        // Agora sim, manda o Lucide criar os ícones após a tela existir
+        lucide.createIcons();
+        console.log("2. Ícones renderizados com sucesso.");
+
         const i1 = document.getElementById('icon-1');
         const i2 = document.getElementById('icon-2');
         const i3 = document.getElementById('icon-3');
@@ -17,14 +19,13 @@ async function playOpeningSequence() {
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
 
-        // Trava de segurança: Se os ícones não renderizarem, revela o GAS imediatamente
-        if (!i1 || !i2 || !i3 || !i4) {
-            console.warn("Prevenção ativada: Elementos não encontrados. Revelando o sistema.");
+        if (!i1 || !check) {
+            console.log("ERRO: Elementos não encontrados no HTML. Revelando GAS.");
             if (loader) loader.style.display = 'none';
             return;
         }
 
-        // Tempo inicial de respiro
+        console.log("3. Iniciando a coreografia!");
         await sleep(600);
 
         // MOVIMENTO 2: Troca cruzada com efeito cascata
@@ -49,8 +50,9 @@ async function playOpeningSequence() {
         
         await sleep(400);
 
-        // MODO OFFLINE: Congela a animação e avisa o usuário
+        // MODO OFFLINE
         if (!navigator.onLine) {
+            console.log("Status: Sem internet. Congelando animação.");
             [i1, i2, i3, i4].forEach(icon => icon.classList.add('freeze'));
             offlineAlert.classList.remove('hidden');
             await sleep(50);
@@ -67,7 +69,6 @@ async function playOpeningSequence() {
 
         await sleep(300);
 
-        // Oculta os coloridos instantaneamente
         [i1, i2, i3, i4].forEach(icon => icon.style.opacity = '0');
 
         // O Pop do Check!
@@ -78,7 +79,6 @@ async function playOpeningSequence() {
         check.classList.remove('pop-effect');
         check.classList.add('pop-settle');
 
-        // Revela textos
         await sleep(300);
         welcome.classList.remove('opacity-0', 'translate-y-4');
         welcome.classList.add('opacity-100', 'translate-y-0');
@@ -87,7 +87,8 @@ async function playOpeningSequence() {
         signature.classList.remove('opacity-0');
         signature.classList.add('opacity-100');
 
-        // FADE OUT DA CORTINA (Revela o GAS)
+        // FADE OUT
+        console.log("4. Finalizando apresentação e revelando o Sesc Mesa Brasil.");
         await sleep(1500);
         loader.classList.add('opacity-0');
         
@@ -97,18 +98,20 @@ async function playOpeningSequence() {
         }, 1000);
 
     } catch (error) {
-        // Fallback de emergência caso haja erro no script
         console.error("Erro na coreografia: ", error);
         const loader = document.getElementById('loader-screen');
         if (loader) loader.style.display = 'none';
     }
 }
 
-// Inicia apenas quando toda a página estiver 100% desenhada
-document.addEventListener('DOMContentLoaded', () => {
-    playOpeningSequence();
-    registerServiceWorker();
-});
+// O segredo de ouro: window.onload garante que o HTML e o CSS terminaram de ser lidos
+window.onload = () => {
+    // Dá um pequeno fôlego extra de 100 milissegundos para o navegador se organizar
+    setTimeout(() => {
+        playOpeningSequence();
+        registerServiceWorker();
+    }, 100);
+};
 
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
