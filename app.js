@@ -1,69 +1,109 @@
-// Renderiza os ícones do pacote Lucide
+// Renderiza os ícones do Lucide
 lucide.createIcons();
 
-// Registra o App para funcionar como PWA/Offline
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Check!: Service Worker operante.', reg.scope))
-            .catch(err => console.error('Erro no Service Worker', err));
+// Função utilitária para aguardar tempo em milissegundos
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+// Orquestrador da Animação
+async function playOpeningSequence() {
+    const i1 = document.getElementById('icon-1'); // Aparelhos (Azul)
+    const i2 = document.getElementById('icon-2'); // Lavagem (Verde)
+    const i3 = document.getElementById('icon-3'); // Visão Geral (Amarelo)
+    const i4 = document.getElementById('icon-4'); // Relatórios (Vermelho)
+    const check = document.getElementById('icon-check');
+    const welcome = document.getElementById('welcome-text');
+    const signature = document.getElementById('signature');
+    const loader = document.getElementById('loader-screen');
+    const offlineAlert = document.getElementById('offline-alert');
+
+    // Tempo inicial de respiro para o usuário ver a tela limpa
+    await sleep(600);
+
+    // MOVIMENTO 2: Troca cruzada com efeito cascata
+    i1.style.transform = 'translate(10px, -10px)'; // 1 vai para a posição do 2
+    await sleep(100);
+    i2.style.transform = 'translate(10px, 10px)';  // 2 vai para o 4
+    await sleep(100);
+    i3.style.transform = 'translate(-10px, -10px)';// 3 vai para o 1
+    await sleep(100);
+    i4.style.transform = 'translate(-10px, 10px)'; // 4 vai para o 3
+
+    await sleep(500);
+
+    // MOVIMENTO 3: Efeito Estilingue (Antecipação em cruzeta)
+    i1.style.transform = 'translate(0px, -50px)'; // Topo
+    await sleep(50);
+    i2.style.transform = 'translate(50px, 0px)';  // Direita
+    await sleep(50);
+    i3.style.transform = 'translate(-50px, 0px)'; // Esquerda
+    await sleep(50);
+    i4.style.transform = 'translate(0px, 50px)';  // Fundo
+    
+    await sleep(400);
+
+    // VERIFICAÇÃO OFFLINE: Se não houver rede, congela a tela aqui
+    if (!navigator.onLine) {
+        [i1, i2, i3, i4].forEach(icon => icon.classList.add('freeze'));
+        
+        // Exibe tela offline
+        offlineAlert.classList.remove('hidden');
+        await sleep(50); // delay para renderização
+        offlineAlert.classList.remove('opacity-0', 'translate-y-4');
+        offlineAlert.classList.add('opacity-100', 'translate-y-0');
+        return; // Interrompe a animação e não revela o GAS
+    }
+
+    // MOVIMENTO 4 & 5: Choque simultâneo e Pop
+    [i1, i2, i3, i4].forEach(icon => {
+        icon.style.transform = 'translate(0px, 0px)';
+        icon.classList.remove('shadow-lg'); // Retira sombra antes de sumir
     });
+
+    // Aguarda o tempo exato do choque no centro
+    await sleep(300);
+
+    // Oculta os coloridos instantaneamente
+    [i1, i2, i3, i4].forEach(icon => icon.style.opacity = '0');
+
+    // O Pop do Check!
+    check.classList.remove('scale-0', 'opacity-0');
+    check.classList.add('pop-effect', 'opacity-100');
+    
+    await sleep(200);
+    check.classList.remove('pop-effect');
+    check.classList.add('pop-settle');
+
+    // Revela a mensagem e a assinatura com slide e fade
+    await sleep(300);
+    welcome.classList.remove('opacity-0', 'translate-y-4');
+    welcome.classList.add('opacity-100', 'translate-y-0');
+    
+    await sleep(400);
+    signature.classList.remove('opacity-0');
+    signature.classList.add('opacity-100');
+
+    // FADE OUT DA CORTINA: Revela o Sesc Mesa Brasil já carregado atrás
+    await sleep(1500); // Tempo final lendo a mensagem
+    loader.classList.add('opacity-0');
+    
+    // Remove o loader do fluxo para permitir o clique no GAS
+    setTimeout(() => {
+        loader.style.pointerEvents = 'none';
+        loader.classList.add('hidden');
+    }, 1000);
 }
 
-// Orquestração da Coreografia
-document.addEventListener("DOMContentLoaded", () => {
-    const icons = document.querySelectorAll('.anim-icon');
-    const iconGrid = document.getElementById('icon-grid');
-    const mainCheck = document.getElementById('main-check');
-    const welcomeMessage = document.getElementById('welcome-message');
-    const signature = document.getElementById('signature');
-    const splashScreen = document.getElementById('splash-screen');
-
-    // Inicia a animação após um pequeno respiro (0.5s)
-    setTimeout(() => {
-        
-        // FASE 1: Expansão em Cascata para fora
-        icons.forEach((icon, index) => {
-            setTimeout(() => {
-                const position = icon.getAttribute('data-position');
-                icon.classList.add(`slide-${position}`);
-            }, index * 120); // 120ms de diferença cria o efeito cascata
-        });
-
-        // FASE 2: O Recuo e Impacto no Centro
-        setTimeout(() => {
-            icons.forEach(icon => {
-                const position = icon.getAttribute('data-position');
-                icon.classList.remove(`slide-${position}`); // Tira o deslize, forçando volta ao centro
-            });
-
-            // FASE 3: A Fusão ("Pop" do Check principal)
-            setTimeout(() => {
-                iconGrid.style.opacity = '0'; // Apaga os ícones coloridos
-                mainCheck.classList.add('animate-pop'); // O Check pula na tela
-
-                // FASE 4: Apresentação da Assinatura e Boas-Vindas
-                setTimeout(() => {
-                    welcomeMessage.classList.remove('opacity-0', 'translate-y-4');
-                    signature.classList.remove('opacity-0');
-
-                    // FASE 5: Transição para o Sistema do Sesc
-                    setTimeout(() => {
-                        // Fade Out da tela inteira
-                        splashScreen.style.opacity = '0';
-                        
-                        // Remoção da barreira para permitir cliques no GAS
-                        setTimeout(() => {
-                            splashScreen.classList.add('hidden-fully');
-                        }, 1000);
-
-                    }, 2200); // Dá ~2 segundos para o usuário ler a tela
-
-                }, 400); // Inicia os textos enquanto o Check estabiliza
-
-            }, 300); // Tempo exato em que os ícones coloridos batem no centro
-
-        }, 1100); // Aguarda todos abrirem na cascata para puxar de volta
-
-    }, 500); 
+// Inicia a orquestração
+window.addEventListener('load', () => {
+    playOpeningSequence();
+    registerServiceWorker();
 });
+
+// Registra o Service Worker para funcionamento do PWA e Cache Offline
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker Registrado: ', reg.scope))
+            .catch(err => console.log('Falha ao registrar Service Worker: ', err));
+    }
+}
