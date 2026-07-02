@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Check - Sesc Mesa Brasil</title>
+    
+    <!-- 1. O "RG" do seu Aplicativo -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#f8fafc">
 
+    <!-- 2. A Elegância (Fonte Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- 3. A Ferramenta de Estilo (Tailwind CSS) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: { checkBg: '#f8fafc' }
+                }
+            }
+        }
+    </script>
+
+    <!-- 4. Os Ícones (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Nosso CSS para a magia da animação -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- O Fundo do App (Slate 50 / #f8fafc) -->
+<body class="bg-checkBg h-screen w-screen overflow-hidden flex items-center justify-center m-0">
+
+    <!-- ========================================== -->
+    <!-- CENA 1: A ANIMAÇÃO E AS BOAS VINDAS        -->
+    <!-- ========================================== -->
+    <div id="splash-screen" class="flex flex-col items-center justify-center w-full h-full absolute z-50 bg-checkBg transition-opacity duration-700">
+        
+        <!-- O Palco da Dança (Grid 2x2 para o efeito cascata) -->
+        <div id="icon-grid" class="grid grid-cols-2 gap-4 relative w-32 h-32">
+            
+            <!-- Os 4 Ícones Iniciais (Atores) -->
+            <div id="icon-1" class="flex items-center justify-center w-14 h-14 bg-blue-600 rounded-2xl shadow-md text-white"><i data-lucide="smartphone"></i></div>
+            <div id="icon-2" class="flex items-center justify-center w-14 h-14 bg-emerald-600 rounded-2xl shadow-md text-white"><i data-lucide="droplets"></i></div>
+            <div id="icon-3" class="flex items-center justify-center w-14 h-14 bg-amber-500 rounded-2xl shadow-md text-white"><i data-lucide="bar-chart-3"></i></div>
+            <div id="icon-4" class="flex items-center justify-center w-14 h-14 bg-red-600 rounded-2xl shadow-md text-white"><i data-lucide="file-text"></i></div>
+
+            <!-- O Ícone Check (Escondido inicialmente) -->
+            <div id="icon-check" class="absolute inset-0 m-auto flex items-center justify-center w-16 h-16 bg-slate-800 rounded-2xl shadow-lg text-white opacity-0 scale-50">
+                <i data-lucide="check-square" class="w-8 h-8"></i>
+            </div>
+        </div>
+
+        <!-- A Mensagem de Boas Vindas (Escondida inicialmente) -->
+        <div id="welcome-text" class="mt-8 text-center opacity-0 translate-y-4">
+            <p class="text-slate-500 text-sm">Bem-vindo ao:</p>
+            <h1 class="text-3xl font-bold text-slate-800 tracking-tight">Check</h1>
+        </div>
+
+        <!-- A Assinatura no Rodapé (Escondida inicialmente) -->
+        <div id="signature" class="absolute bottom-6 opacity-0">
+            <p class="text-slate-500 text-sm font-medium">
+                Powered with <span style="color: #e80523;">&#10084;</span> by <strong class="text-slate-700">Mesaque</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CENA 2: O APLICATIVO REAL (GAS)            -->
+    <!-- ========================================== -->
+    <iframe id="gas-app" src="SEU_LINK_DO_GAS_AQUI" class="w-full h-full border-none opacity-0 transition-opacity duration-1000"></iframe>
+
+    <!-- Nosso JS para controlar a coreografia -->
+    <script src="app.js"></script>
+    <script>
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
+    </script>
+</body>
+</html>
