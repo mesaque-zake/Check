@@ -22,6 +22,7 @@ async function playOpeningSequence() {
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
+        const shockwave = document.getElementById('shockwave');
 
         if (!i1 || !check) {
             console.log("ERRO: Elementos HTML não encontrados. Revelando sistema.");
@@ -37,7 +38,6 @@ async function playOpeningSequence() {
 
         console.log("3. Iniciando a dança do estilingue!");
         
-        // Movimento 1: Estáticos no início
         await sleep(500);
 
         // Movimento 2: Giro anti-horário
@@ -64,43 +64,62 @@ async function playOpeningSequence() {
         i4.style.transform = posC;
         await sleep(600);
 
-        // VERIFICAÇÃO OFFLINE (Congela tudo aqui)
+        // ==========================================
+        // CENA ALTERNATIVA: OFFLINE (A Repulsão)
+        // ==========================================
         if (!navigator.onLine) {
-            console.log("Status: Sem internet. Congelando animação.");
+            console.log("Status: Sem internet. Iniciando repulsão.");
+            
+            // Aplica filtro cinza e afasta para as pontas
             [i1, i2, i3, i4].forEach(icon => icon.classList.add('freeze'));
+            
+            i1.style.transform = 'translate(-160px, -160px) rotate(-45deg) scale(0.7)';
+            i2.style.transform = 'translate(160px, -160px) rotate(45deg) scale(0.7)';
+            i3.style.transform = 'translate(-160px, 160px) rotate(-135deg) scale(0.7)';
+            i4.style.transform = 'translate(160px, 160px) rotate(135deg) scale(0.7)';
+
             offlineAlert.classList.remove('hidden');
-            await sleep(50);
-            offlineAlert.classList.remove('opacity-0', 'translate-y-4');
-            offlineAlert.classList.add('opacity-100', 'translate-y-0');
-            return;
+            await sleep(100);
+            offlineAlert.classList.remove('opacity-0', 'scale-95');
+            offlineAlert.classList.add('opacity-100', 'scale-100');
+            return; // Encerra a coreografia aqui
         }
 
-        // Movimento 5: O Vórtice! Eles giram 180 graus pro centro e encolhem até sumir
+        // ==========================================
+        // CENA PRINCIPAL: A FUSÃO
+        // ==========================================
+        // Movimento 5: O Vórtice! Eles são sugados girando pro centro
         [i1, i2, i3, i4].forEach(icon => {
-            icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0)';
+            icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0.2)';
             icon.style.opacity = '0';
         });
 
-        // Espera eles serem "sugados" pro centro
-        await sleep(350);
+        // Aguardamos MENOS tempo. O "Check" nasce quando eles ainda estão quase sumindo
+        await sleep(250); 
 
-        // Movimento 6: A Fusão! O Check explode ocupando o espaço dos 4
+        // Dispara o clarão (Shockwave)
+        if(shockwave) {
+            shockwave.style.transform = 'scale(4)';
+            shockwave.style.opacity = '0';
+        }
+
+        // O Check explode na tela (Pop)
         check.style.opacity = '1';
         check.style.transform = 'scale(1.2)';
-        await sleep(250);
-        check.style.transform = 'scale(1)'; // Acomoda o pop
+        await sleep(200);
+        check.style.transform = 'scale(1)'; // Acomoda
 
-        await sleep(400);
+        await sleep(350);
 
-        // Movimento 7: O Check sobe um pouco para dar espaço e as Boas-vindas entram
-        check.style.transform = 'translate(0px, -50px) scale(1)';
+        // Movimento 7: O Check sobe um pouco e revela o título
+        check.style.transform = 'translate(0px, -40px) scale(1)';
         
         await sleep(200);
         welcome.classList.remove('opacity-0', 'translate-y-4');
         welcome.classList.add('opacity-100', 'translate-y-0');
         
         // FADE OUT e Libera a Tela
-        console.log("4. Apresentação concluída. Revelando o GAS.");
+        console.log("4. Apresentação concluída. Revelando o sistema.");
         await sleep(1500);
         loader.classList.add('opacity-0');
         
