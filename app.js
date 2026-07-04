@@ -22,7 +22,6 @@ async function playOpeningSequence() {
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
-        const shockwave = document.getElementById('shockwave');
 
         if (!i1 || !check) {
             console.log("ERRO: Elementos HTML não encontrados. Revelando sistema.");
@@ -30,24 +29,22 @@ async function playOpeningSequence() {
             return;
         }
 
-        // As 4 posições (Cadeiras do Carrossel)
-        const posA = 'translate(-40px, -40px)'; // Topo Esquerda
-        const posB = 'translate(40px, -40px)';  // Topo Direita
-        const posC = 'translate(-40px, 40px)';  // Baixo Esquerda
-        const posD = 'translate(40px, 40px)';   // Baixo Direita
+        const posA = 'translate(-40px, -40px)'; 
+        const posB = 'translate(40px, -40px)';  
+        const posC = 'translate(-40px, 40px)';  
+        const posD = 'translate(40px, 40px)';   
 
-        console.log("3. Iniciando a dança do estilingue!");
-        
+        console.log("3. Iniciando a dança!");
         await sleep(500);
 
-        // Movimento 2: Giro anti-horário
+        // Movimento 2: Giro
         i1.style.transform = posC;
         i2.style.transform = posA;
         i3.style.transform = posD;
         i4.style.transform = posB;
         await sleep(600);
 
-        // Movimento 3: Continua o giro e revela assinatura
+        // Movimento 3: Giro
         i1.style.transform = posD;
         i2.style.transform = posC;
         i3.style.transform = posB;
@@ -57,7 +54,7 @@ async function playOpeningSequence() {
         signature.classList.add('opacity-100');
         await sleep(600);
 
-        // Movimento 4: Último giro antes da decisão
+        // Movimento 4: Giro final
         i1.style.transform = posB;
         i2.style.transform = posD;
         i3.style.transform = posA;
@@ -65,12 +62,11 @@ async function playOpeningSequence() {
         await sleep(600);
 
         // ==========================================
-        // CENA ALTERNATIVA: OFFLINE (A Repulsão)
+        // CENA ALTERNATIVA: OFFLINE (Repulsão)
         // ==========================================
         if (!navigator.onLine) {
             console.log("Status: Sem internet. Iniciando repulsão.");
             
-            // Aplica filtro cinza e afasta para as pontas
             [i1, i2, i3, i4].forEach(icon => icon.classList.add('freeze'));
             
             i1.style.transform = 'translate(-160px, -160px) rotate(-45deg) scale(0.7)';
@@ -82,43 +78,33 @@ async function playOpeningSequence() {
             await sleep(100);
             offlineAlert.classList.remove('opacity-0', 'scale-95');
             offlineAlert.classList.add('opacity-100', 'scale-100');
-            return; // Encerra a coreografia aqui
+            return; 
         }
 
         // ==========================================
-        // CENA PRINCIPAL: A FUSÃO
+        // CENA PRINCIPAL: A FUSÃO (Buraco Negro)
         // ==========================================
-        // Movimento 5: O Vórtice! Eles são sugados girando pro centro
+        // Os coloridos são sugados
         [i1, i2, i3, i4].forEach(icon => {
             icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0.2)';
             icon.style.opacity = '0';
         });
 
-        // Aguardamos MENOS tempo. O "Check" nasce quando eles ainda estão quase sumindo
-        await sleep(250); 
-
-        // Dispara o clarão (Shockwave)
-        if(shockwave) {
-            shockwave.style.transform = 'scale(4)';
-            shockwave.style.opacity = '0';
-        }
-
-        // O Check explode na tela (Pop)
+        // ESPERA ZERO! O Check nasce engolindo eles.
+        await sleep(50); 
         check.style.opacity = '1';
-        check.style.transform = 'scale(1.2)';
-        await sleep(200);
+        check.style.transform = 'scale(1.15)';
+        
+        await sleep(350); 
         check.style.transform = 'scale(1)'; // Acomoda
 
-        await sleep(350);
-
-        // Movimento 7: O Check sobe um pouco e revela o título
-        check.style.transform = 'translate(0px, -40px) scale(1)';
-        
         await sleep(200);
+
+        // Revela o título (agora ancorado na posição perfeita)
         welcome.classList.remove('opacity-0', 'translate-y-4');
         welcome.classList.add('opacity-100', 'translate-y-0');
         
-        // FADE OUT e Libera a Tela
+        // Finalização e liberação de tela
         console.log("4. Apresentação concluída. Revelando o sistema.");
         await sleep(1500);
         loader.classList.add('opacity-0');
@@ -136,21 +122,20 @@ async function playOpeningSequence() {
 }
 
 // ==========================================
-// 3. REGISTRO DO SERVICE WORKER
+// 3. REGISTRO DO SW
 // ==========================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Service Worker Registrado: ', reg.scope))
+            .then(reg => console.log('SW Registrado: ', reg.scope))
             .catch(err => console.log('Falha no SW: ', err));
     }
 }
 
 // ==========================================
-// 4. LÓGICA DE INSTALAÇÃO DO PWA
+// 4. INSTALAÇÃO PWA
 // ==========================================
 let deferredPrompt;
-
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -167,7 +152,7 @@ window.installPWA = async () => {
     
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    console.log(`Escolha de instalação: ${outcome}`);
+    console.log(`Escolha: ${outcome}`);
     
     deferredPrompt = null;
     const installBtn = document.getElementById('install-btn');
@@ -178,7 +163,7 @@ window.installPWA = async () => {
 };
 
 // ==========================================
-// 5. DETECÇÃO E AVISO PARA IOS
+// 5. DETECÇÃO IOS
 // ==========================================
 function checkIOS() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -199,7 +184,7 @@ function checkIOS() {
 }
 
 // ==========================================
-// 6. O GATILHO DE INÍCIO
+// Gatilho
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
