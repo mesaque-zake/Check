@@ -16,3 +16,29 @@
     filter: grayscale(100%) opacity(40%);
     transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
+/* Tremor Caótico de Alta Frequência para as Camadas do Glitch PWA */
+@keyframes glitch-cyan-vibe {
+    0% { transform: translate(-3px, -1px); }
+    20% { transform: translate(-5px, 1px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(-4px, 2px); }
+    80% { transform: translate(-6px, -1px); }
+    100% { transform: translate(-3px, -1px); }
+}
+
+@keyframes glitch-rose-vibe {
+    0% { transform: translate(3px, 1px); }
+    20% { transform: translate(5px, -1px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(4px, -2px); }
+    80% { transform: translate(6px, 1px); }
+    100% { transform: translate(3px, 1px); }
+}
+
+.animate-glitch-cyan {
+    animation: glitch-cyan-vibe 0.1s infinite linear;
+}
+
+.animate-glitch-rose {
+    animation: glitch-rose-vibe 0.1s infinite linear;
+}
