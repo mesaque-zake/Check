@@ -120,6 +120,13 @@ async function playOpeningSequence() {
 
         await sleep(200);
 
+        // ATIVAÇÃO DO TREMOR GLITCH (WALL B)
+        // Faz as camadas Ciano e Vermelha vibrarem de forma caótica para surpreender o usuário!
+        const cyanLayer = document.getElementById('pwa-glitch-cyan');
+        const roseLayer = document.getElementById('pwa-glitch-rose');
+        if (cyanLayer) cyanLayer.classList.add('animate-glitch-cyan');
+        if (roseLayer) roseLayer.classList.add('animate-glitch-rose');
+
         // Revela o título "Check!"
         welcome.classList.remove('opacity-0', 'translate-y-4');
         welcome.classList.add('opacity-100', 'translate-y-0');
@@ -134,7 +141,7 @@ async function playOpeningSequence() {
         }
 
         console.log("4. Pentágono concluído. Revelando o iMesa.");
-        await sleep(1000);
+        await sleep(1000); // Deixa vibrando mais 1 segundo antes do fade out
         loader.classList.add('opacity-0');
         
         setTimeout(() => {
@@ -148,7 +155,6 @@ async function playOpeningSequence() {
         if (loader) loader.style.display = 'none';
     }
 }
-
 // ==========================================
 // 3. REGISTRO DO SW
 // ==========================================
