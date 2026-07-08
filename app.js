@@ -36,6 +36,7 @@ async function playOpeningSequence() {
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
+        const glowContainer = document.getElementById('glow-container');
 
         if (!i1 || !i5 || !check) {
             console.log("ERRO: Elementos do Pentágono não encontrados. Revelando sistema.");
@@ -103,35 +104,44 @@ async function playOpeningSequence() {
         }
 
         // ==========================================
-        // CENA PRINCIPAL: A FUSÃO (Buraco Negro no Centro)
+        // CENA PRINCIPAL: A FUSÃO E REVELAÇÃO REATIVA
         // ==========================================
-        // Os 5 coloridos mergulham e encolhem no centro de gravidade
+        // 1. Os 5 blocos coloridos mergulham e encolhem no centro de gravidade
         [i1, i2, i3, i4, i5].forEach(icon => {
             icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0.2)';
             icon.style.opacity = '0';
         });
 
-        // O Check de fusão engole a todos instantaneamente
+        // 2. Revela a Aura Galáctica Dançante em segundo plano
+        if (glowContainer) {
+            glowContainer.classList.remove('hidden');
+            setTimeout(() => {
+                glowContainer.classList.remove('opacity-0');
+                glowContainer.classList.add('opacity-100');
+            }, 50);
+        }
+
+        // 3. O SVG de fusão surge engolindo a todos instantaneamente
         check.style.opacity = '1';
         check.style.transform = 'scale(1.15)';
         
         await sleep(350); 
-        check.style.transform = 'scale(1)'; // Settle
+        check.style.transform = 'scale(1)'; // Acomodação visual (Settle)
 
         await sleep(200);
 
-        // ATIVAÇÃO DO TREMOR GLITCH (WALL B)
-        // Faz as camadas Ciano e Vermelha vibrarem de forma caótica para surpreender o usuário!
-        const cyanLayer = document.getElementById('pwa-glitch-cyan');
-        const roseLayer = document.getElementById('pwa-glitch-rose');
-        if (cyanLayer) cyanLayer.classList.add('animate-glitch-cyan');
-        if (roseLayer) roseLayer.classList.add('animate-glitch-rose');
+        // 4. DISPARA O PULSO DE ENERGIA NEON dentro do vetor iM (da esquerda para a direita)
+        const pulseAnim = document.getElementById('pulse-anim');
+        if (pulseAnim) {
+            console.log("[PWA] Iniciando pulso de energia pelo monograma...");
+            pulseAnim.beginElement();
+        }
 
         // Revela o título "Check!"
         welcome.classList.remove('opacity-0', 'translate-y-4');
         welcome.classList.add('opacity-100', 'translate-y-0');
         
-        // PILAR 4: Sincronização Inteligente de Carregamento (Fim da tela branca)
+        // 5. Sincronização Inteligente de Carregamento (Evita a tela branca do iframe)
         // Aguarda até o iframe do Google estar realmente pronto ou dá timeout após 15 segundos
         let timeoutCounter = 0;
         while (!iframeLoaded && timeoutCounter < 30) {
@@ -140,8 +150,8 @@ async function playOpeningSequence() {
             timeoutCounter++;
         }
 
-        console.log("4. Pentágono concluído. Revelando o iMesa.");
-        await sleep(1000); // Deixa vibrando mais 1 segundo antes do fade out
+        console.log("5. iMesa pronto. Removendo Splash Screen.");
+        await sleep(1000); // Garante a permanência do pulso luminoso por tempo confortável
         loader.classList.add('opacity-0');
         
         setTimeout(() => {
@@ -155,6 +165,7 @@ async function playOpeningSequence() {
         if (loader) loader.style.display = 'none';
     }
 }
+
 // ==========================================
 // 3. REGISTRO DO SW
 // ==========================================
@@ -219,7 +230,7 @@ function checkIOS() {
 // ==========================================
 // 6. PONTE DE COMUNICAÇÃO (POSTMESSAGE) & HISTÓRICO
 // ==========================================
-// Registra estados do histórico para o PWA pai controlar o botão voltar físico
+// Registra estados do histórico para o PWA pai controlar o botão voltar físico do dispositivo
 window.addEventListener('DOMContentLoaded', () => {
     window.history.replaceState({ state: 'pwa_base' }, '');
     window.history.pushState({ state: 'pwa_active' }, '');
