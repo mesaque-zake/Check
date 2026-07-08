@@ -70,56 +70,55 @@
             <!-- Contêiner de Ícones em Pentágono -->
             <div class="relative w-48 h-48 flex items-center justify-center transform transition-transform duration-700 md:scale-125">
                 
-                <!-- Icone 1: Aparelhos (Azul) - Topo (0º) -->
-                <div id="icon-1" class="actor absolute w-16 h-16 bg-blue-600 rounded-2xl shadow-2xl shadow-blue-600/[0.65] flex items-center justify-center z-20" style="transform: translate(0px, -55px);">
+                <!-- Icone 1: Aparelhos (Azul) - Topo (0º) (Opacidade de sombra nativa corrigida) -->
+                <div id="icon-1" class="actor absolute w-16 h-16 bg-blue-600 rounded-2xl shadow-2xl shadow-blue-600/50 flex items-center justify-center z-20" style="transform: translate(0px, -55px);">
                     <i data-lucide="smartphone" class="text-white w-8 h-8"></i>
                 </div>
                 
-                <!-- Icone 2: Lavagem (Verde) - Direita Superior (72º) -->
-                <div id="icon-2" class="actor absolute w-16 h-16 bg-emerald-600 rounded-2xl shadow-2xl shadow-emerald-600/[0.65] flex items-center justify-center z-20" style="transform: translate(52px, -17px);">
+                <!-- Icone 2: Lavagem (Verde) - Direita Superior (72º) (Opacidade de sombra nativa corrigida) -->
+                <div id="icon-2" class="actor absolute w-16 h-16 bg-emerald-600 rounded-2xl shadow-2xl shadow-emerald-600/50 flex items-center justify-center z-20" style="transform: translate(52px, -17px);">
                     <i data-lucide="droplets" class="text-white w-8 h-8"></i>
                 </div>
 
-                <!-- Icone 3: Ways (Fúcsia 800) - Direita Inferior (144º) -->
-                <div id="icon-5" class="actor absolute w-16 h-16 bg-fuchsia-800 rounded-2xl shadow-2xl shadow-fuchsia-800/[0.65] flex items-center justify-center z-20 font-dancing" style="transform: translate(32px, 45px);">
+                <!-- Icone 3: Ways (Fúcsia 800) - Direita Inferior (144º) (Opacidade de sombra nativa corrigida) -->
+                <div id="icon-5" class="actor absolute w-16 h-16 bg-fuchsia-800 rounded-2xl shadow-2xl shadow-fuchsia-800/50 flex items-center justify-center z-20 font-dancing" style="transform: translate(32px, 45px);">
                     <span class="text-white text-3xl font-bold leading-none mt-1 select-none">W</span>
                 </div>
 
-                <!-- Icone 4: Visão Geral (Amarelo) - Esquerda Inferior (216º) -->
-                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-50 rounded-2xl shadow-2xl shadow-amber-500/[0.65] flex items-center justify-center z-20" style="transform: translate(-32px, 45px);">
+                <!-- Icone 4: Visão Geral (Amarelo) - Esquerda Inferior (216º) (Opacidade de sombra nativa corrigida) -->
+                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-500 rounded-2xl shadow-2xl shadow-amber-500/50 flex items-center justify-center z-20" style="transform: translate(-32px, 45px);">
                     <i data-lucide="bar-chart-3" class="text-white w-8 h-8"></i>
                 </div>
 
-                <!-- Icone 5: Relatórios (Vermelho) - Esquerda Superior (288º) -->
-                <div id="icon-4" class="actor absolute w-16 h-16 bg-red-600 rounded-2xl shadow-2xl shadow-red-600/[0.65] flex items-center justify-center z-20" style="transform: translate(-52px, -17px);">
+                <!-- Icone 5: Relatórios (Vermelho) - Esquerda Superior (288º) (Opacidade de sombra nativa corrigida) -->
+                <div id="icon-4" class="actor absolute w-16 h-16 bg-red-600 rounded-2xl shadow-2xl shadow-red-600/50 flex items-center justify-center z-20" style="transform: translate(-52px, -17px);">
                     <i data-lucide="file-text" class="text-white w-8 h-8"></i>
                 </div>
 
-                <!-- As Sombras Coloridas Dançantes (Aura) -->
-                <!-- As 5 luzes estão posicionadas no raio orbital externo de 65px com transição suave estendida para 2 segundos -->
-                <div id="glow-container" class="absolute w-48 h-48 flex items-center justify-center pointer-events-none transition-opacity duration-[2000ms] hidden opacity-0 z-10 animate-spin-slow">
-                    <!-- Luz Azul (Aparelhos) - Topo -->
-                    <div class="absolute w-20 h-20 rounded-full bg-blue-500/35 blur-2xl" style="transform: translate(0px, -65px);"></div>
-                    <!-- Luz Verde (Lavagem) - Direita Superior -->
-                    <div class="absolute w-20 h-20 rounded-full bg-emerald-500/35 blur-2xl" style="transform: translate(62px, -20px);"></div>
-                    <!-- Luz Fúcsia (Ways) - Direita Inferior -->
-                    <div class="absolute w-20 h-20 rounded-full bg-fuchsia-500/35 blur-2xl" style="transform: translate(38px, 53px);"></div>
-                    <!-- Luz Amarela (Dashboard) - Esquerda Inferior -->
-                    <div class="absolute w-20 h-20 rounded-full bg-amber-500/35 blur-2xl" style="transform: translate(-38px, 53px);"></div>
-                    <!-- Luz Vermelha (Relatórios) - Esquerda Superior -->
-                    <div class="absolute w-20 h-20 rounded-full bg-red-500/35 blur-2xl" style="transform: translate(-62px, -20px);"></div>
+                <!-- As Sombras Coloridas Dançantes (Aura Cósmica com espalhamento de 90px e blur-3xl) -->
+                <div id="glow-container" class="absolute w-72 h-72 flex items-center justify-center pointer-events-none transition-opacity duration-[2000ms] hidden opacity-0 z-10 animate-spin-slow">
+                    <!-- Sombra Azul (Aparelhos) - Topo -->
+                    <div class="absolute w-36 h-36 rounded-full bg-blue-500/60 blur-3xl" style="transform: translate(0px, -90px);"></div>
+                    <!-- Sombra Verde (Lavagem) - Direita Superior -->
+                    <div class="absolute w-36 h-36 rounded-full bg-emerald-500/60 blur-3xl" style="transform: translate(86px, -28px);"></div>
+                    <!-- Sombra Fúcsia (Ways) - Direita Inferior -->
+                    <div class="absolute w-36 h-36 rounded-full bg-fuchsia-500/60 blur-3xl" style="transform: translate(53px, 73px);"></div>
+                    <!-- Sombra Amarela (Dashboard) - Esquerda Inferior -->
+                    <div class="absolute w-36 h-36 rounded-full bg-amber-500/60 blur-3xl" style="transform: translate(-53px, 73px);"></div>
+                    <!-- Sombra Vermelha (Relatórios) - Esquerda Superior -->
+                    <div class="absolute w-36 h-36 rounded-full bg-red-500/60 blur-3xl" style="transform: translate(-86px, -28px);"></div>
                 </div>
 
-                <!-- O Novo Alvo Final de Fusão: O Logo "iM" Monograma SVG Solto e Reduzido (Tamanho w-36 com sombra de contorno vetorial aplicada) -->
-                <div id="icon-check" class="actor absolute w-44 h-44 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
-                    <svg viewBox="216.8177 30.7488 232.3323 186.3397" class="w-36 h-36 relative drop-shadow-[0_10px_25px_rgba(2,15,61,0.22)]" xmlns="http://www.w3.org/2000/svg">
+                <!-- O Novo Alvo Final de Fusão: O Logo "iM" Monograma SVG Solto e Reduzido (Tamanho w-28 no centro de w-36) -->
+                <div id="icon-check" class="actor absolute w-36 h-36 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
+                    <svg viewBox="216.8177 30.7488 232.3323 186.3397" class="w-28 h-28 relative drop-shadow-[0_10px_25px_rgba(2,15,61,0.22)]" xmlns="http://www.w3.org/2000/svg">
                         
                         <!-- Pingo do 'i' (Animação Cíclica Ativa) -->
                         <g transform="matrix(2.0419120788574214, 0, 0, 2.010004997253418, -445.78475324110303, 16.383588560075474)">
                             <circle cx="331.003" cy="36.786" r="6.502" class="animate-dot-cycle" style="stroke-width: 1;" />
                         </g>
                         
-                        <!-- Monograma Fluido (Preenchimento com Azul-Marinho Sólido #020f3d) -->
+                        <!-- Monograma Fluido (Preenchimento com o novo Azul-Marinho Escuro #020f3d) -->
                         <path d="
                             M 222.853 124.961 
                             C 222.853 119.332 231.872 116.392 237.153 119.502 
