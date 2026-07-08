@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Check!</title>
+    <title>iMesa</title>
     
     <!-- Open Graph / Prévia para WhatsApp e Redes Sociais -->
-    <meta property="og:title" content="Check! - Controle Operacional">
-    <meta property="og:description" content="Acesse agora o Controle Operacional do Sesc Mesa Brasil - Unidade Itaquera">
+    <meta property="og:title" content="iMesa">
+    <meta property="og:description" content="Acesse agora o Ecossistema Operacional do Sesc Mesa Brasil - Unidade Itaquera">
     <meta property="og:image" content="Icon512.png">
     <meta property="og:type" content="website">
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f8fafc">
-    <link class="rounded-xl" rel="icon" type="image/png" href="Favicon.png">
+    <link rel="icon" type="image/png" href="Favicon.png">
     <link rel="apple-touch-icon" href="Icon180.png">
     
     <!-- Fontes do Google: Plus Jakarta Sans e Dancing Script -->
@@ -29,7 +29,7 @@
                 extend: {
                     fontFamily: { 
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        dancing: ['"Dancing Script"', 'cursive'] // Classe font-dancing habilitada!
+                        dancing: ['"Dancing Script"', 'cursive']
                     }
                 }
             }
@@ -38,10 +38,10 @@
 </head>
 <body class="bg-slate-50 overflow-hidden font-sans text-slate-800 antialiased select-none">
 
-    <!-- Iframe do GAS com permissões nativas de GPS e Área de Transferência liberadas para o PWA -->
+    <!-- Iframe do GAS atualizado com permissões completas de hardware -->
     <iframe 
         id="gas-frame"
-        src="https://script.google.com/macros/s/AKfycbyLG_IyGOtAp6SYEsfTIC2Zs9Yzqj3016oSf-pztDsqtVX9bO-53OQHylIb8XDRycJA/exec" 
+        src="https://script.google.com/macros/s/AKfycbx1ZsfNbofIF-ZPBmqurfNT9rQTU1UWqa7Tw3ttLlTrNYcVY9zcmOJQGrfGra8arHoO/exec" 
         class="absolute inset-0 w-full h-full border-none z-0"
         allow="geolocation *; clipboard-write *">
     </iframe>
@@ -61,60 +61,106 @@
         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-r border-b border-slate-100"></div>
     </div>
 
+    <!-- Tela do Carregador (Loader) -->
     <div id="loader-screen" class="absolute inset-0 bg-slate-50 z-50 flex flex-col items-center justify-center transition-opacity duration-1000">
         
-        <!-- Wrapper Centralizador: Garante que os ícones e o texto andem sempre juntos -->
+        <!-- Wrapper Centralizador -->
         <div class="relative flex flex-col items-center justify-center z-20">
             
-            <!-- Contêiner de Ícones em Pentágono (Matemática de ângulo 72º) -->
+            <!-- Contêiner de Ícones em Pentágono -->
             <div class="relative w-48 h-48 flex items-center justify-center transform transition-transform duration-700 md:scale-125">
                 
                 <!-- Icone 1: Aparelhos (Azul) - Topo (0º) -->
-                <div id="icon-1" class="actor absolute w-16 h-16 bg-blue-600 rounded-2xl shadow-2xl shadow-blue-600/[0.65] flex items-center justify-center z-10" style="transform: translate(0px, -55px);">
+                <div id="icon-1" class="actor absolute w-16 h-16 bg-blue-600 rounded-2xl shadow-2xl shadow-blue-600/[0.65] flex items-center justify-center z-20" style="transform: translate(0px, -55px);">
                     <i data-lucide="smartphone" class="text-white w-8 h-8"></i>
                 </div>
                 
                 <!-- Icone 2: Lavagem (Verde) - Direita Superior (72º) -->
-                <div id="icon-2" class="actor absolute w-16 h-16 bg-emerald-600 rounded-2xl shadow-2xl shadow-emerald-600/[0.65] flex items-center justify-center z-10" style="transform: translate(52px, -17px);">
+                <div id="icon-2" class="actor absolute w-16 h-16 bg-emerald-600 rounded-2xl shadow-2xl shadow-emerald-600/[0.65] flex items-center justify-center z-20" style="transform: translate(52px, -17px);">
                     <i data-lucide="droplets" class="text-white w-8 h-8"></i>
                 </div>
 
                 <!-- Icone 3: Ways (Fúcsia 800) - Direita Inferior (144º) -->
-                <div id="icon-5" class="actor absolute w-16 h-16 bg-fuchsia-800 rounded-2xl shadow-2xl shadow-fuchsia-800/[0.65] flex items-center justify-center z-10 font-dancing" style="transform: translate(32px, 45px);">
+                <div id="icon-5" class="actor absolute w-16 h-16 bg-fuchsia-800 rounded-2xl shadow-2xl shadow-fuchsia-800/[0.65] flex items-center justify-center z-20 font-dancing" style="transform: translate(32px, 45px);">
                     <span class="text-white text-3xl font-bold leading-none mt-1 select-none">W</span>
                 </div>
 
                 <!-- Icone 4: Visão Geral (Amarelo) - Esquerda Inferior (216º) -->
-                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-500 rounded-2xl shadow-2xl shadow-amber-500/[0.65] flex items-center justify-center z-10" style="transform: translate(-32px, 45px);">
+                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-500 rounded-2xl shadow-2xl shadow-amber-500/[0.65] flex items-center justify-center z-20" style="transform: translate(-32px, 45px);">
                     <i data-lucide="bar-chart-3" class="text-white w-8 h-8"></i>
                 </div>
 
                 <!-- Icone 5: Relatórios (Vermelho) - Esquerda Superior (288º) -->
-                <div id="icon-4" class="actor absolute w-16 h-16 bg-red-600 rounded-2xl shadow-2xl shadow-red-600/[0.65] flex items-center justify-center z-10" style="transform: translate(-52px, -17px);">
+                <div id="icon-4" class="actor absolute w-16 h-16 bg-red-600 rounded-2xl shadow-2xl shadow-red-600/[0.65] flex items-center justify-center z-20" style="transform: translate(-52px, -17px);">
                     <i data-lucide="file-text" class="text-white w-8 h-8"></i>
                 </div>
 
-                <!-- O Alvo Final da Fusão: O Logo "iM" Glitch em Plus Jakarta Sans ("M" em Negrito absoluto e "i" Fino) -->
-                <div id="icon-check" class="actor absolute w-28 h-28 bg-slate-800 rounded-3xl shadow-2xl shadow-slate-800/50 flex items-center justify-center z-20 overflow-hidden" style="transform: scale(0); opacity: 0;">
-                    <div class="relative flex items-center justify-center font-sans tracking-tighter text-5xl leading-none select-none" style="width: 100%; height: 100%;">
-                        <!-- Camada Ciano (Glitch Exagerado) -->
-                        <span id="pwa-glitch-cyan" class="absolute font-normal text-[#00f0ff] opacity-80" style="transform: translate(-3px, -1px); font-size: inherit;">
-                            i<span class="font-black">M</span>
-                        </span>
-                        <!-- Camada Vermelha (Glitch Exagerado) -->
-                        <span id="pwa-glitch-rose" class="absolute font-normal text-[#ff0055] opacity-85" style="transform: translate(3px, 1px); font-size: inherit;">
-                            i<span class="font-black">M</span>
-                        </span>
-                        <!-- Camada Frontal Branca -->
-                        <span class="relative font-normal text-white" style="font-size: inherit;">
-                            i<span class="font-black">M</span>
-                        </span>
-                    </div>
+                <!-- PILAR 3: As Sombras Coloridas Dançantes (Aura) -->
+                <!-- Elas começam ocultas e se revelarão atrás do SVG realizando um giro contínuo lento -->
+                <div id="glow-container" class="absolute w-48 h-48 flex items-center justify-center pointer-events-none transition-all duration-1000 hidden opacity-0 z-10 animate-spin-slow">
+                    <div class="absolute w-20 h-20 rounded-full bg-blue-500/35 blur-2xl" style="transform: translate(0px, -45px);"></div>
+                    <div class="absolute w-20 h-20 rounded-full bg-emerald-500/35 blur-2xl" style="transform: translate(42px, -14px);"></div>
+                    <div class="absolute w-20 h-20 rounded-full bg-fuchsia-500/35 blur-2xl" style="transform: translate(26px, 36px);"></div>
+                    <div class="absolute w-20 h-20 rounded-full bg-amber-500/35 blur-2xl" style="transform: translate(-26px, 36px);"></div>
+                    <div class="absolute w-20 h-20 rounded-full bg-red-500/35 blur-2xl" style="transform: translate(-42px, -14px);"></div>
+                </div>
+
+                <!-- O Novo Alvo Final de Fusão: O Logo "iM" Monograma SVG Solto (Sem card de fundo) -->
+                <div id="icon-check" class="actor absolute w-64 h-64 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
+                    <svg viewBox="216.8177 30.7488 232.3323 186.3397" class="w-56 h-56 relative" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- O Gradiente de Energia Neon que se deslocará pelo traçado do monograma -->
+                            <linearGradient id="energy-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#020f3d" />
+                                <stop id="pulse-stop" offset="0%" stop-color="#00f0ff">
+                                    <animate id="pulse-anim" attributeName="offset" values="0; 1" dur="1.3s" repeatCount="1" fill="freeze" begin="indefinite" />
+                                </stop>
+                                <stop offset="100%" stop-color="#020f3d" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Pingo do 'i' (Ciano Sesc Fixo) -->
+                        <g transform="matrix(2.0419120788574214, 0, 0, 2.010004997253418, -445.78475324110303, 16.383588560075474)">
+                            <circle cx="331.003" cy="36.786" r="6.502" class="text-cyan-400 fill-current" style="stroke-width: 1;" />
+                        </g>
+                        
+                        <!-- Monograma Fluido (Preenchido com o Gradiente de Energia) -->
+                        <path d="
+                            M 222.853 124.961 
+                            C 222.853 119.332 231.872 116.392 237.153 119.502 
+                            C 242.049 122.386 240.683 130.227 240.683 132.839 
+                            L 241.155 171.773 
+                            C 243.523 204.675 287.375 209.828 285.797 163.508 
+                            L 285.797 74.687 
+                            C 285.795 40.916 326.631 19.807 359.304 36.69 
+                            C 362.224 38.2 364.962 39.973 367.474 41.985 
+                            C 395.593 19.471 440.392 32.648 448.113 65.705 
+                            C 448.803 68.658 449.15 71.669 449.15 74.687 
+                            L 449.15 188.018 
+                            C 449.15 199.275 435.539 206.31 424.647 200.682 
+                            C 419.593 198.07 416.479 193.243 416.479 188.018 
+                            L 416.479 74.687 
+                            C 416.479 63.431 402.868 56.395 391.977 62.023 
+                            C 386.923 64.635 383.809 69.463 383.809 74.687 
+                            L 383.809 188.018 
+                            C 383.809 199.275 370.197 206.31 359.306 200.682 
+                            C 354.252 198.07 351.138 193.243 351.138 188.018 
+                            L 351.138 74.687 
+                            C 351.138 63.431 337.527 56.395 326.635 62.023 
+                            C 321.582 64.635 318.468 69.463 318.468 74.687 
+                            L 318.468 167.454 
+                            C 318.468 233.259 233.584 230.623 223.323 177.282 
+                            L 222.853 124.961
+                        " 
+                        fill="url(#energy-pulse)" 
+                        style="stroke-width: 1;" 
+                        transform="matrix(1, 0, 0, 1, 0, -7.105427357601002e-15)" />
+                    </svg>
                 </div>
 
             </div>
 
-            <div id="welcome-text" class="text-center mt-6 space-y-1 fade-in">
+            <div id="welcome-text" class="text-center mt-6 space-y-1 opacity-0 transform translate-y-4 transition-all duration-700">
               <h1 class="text-3xl font-black text-slate-800 tracking-tight leading-none">Check!</h1>
               <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Sesc Mesa Brasil</p>
             </div>
