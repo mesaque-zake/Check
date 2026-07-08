@@ -47,4 +47,27 @@ self.addEventListener('activate', (event) => {
 // 3. INTERCEPTAÇÃO DE REDE (FETCH STRATEGIES)
 // ==========================================
 self.addEventListener('fetch', (event) => {
-    // ESTRATÉGIA CACHE-FIRST: Intercepta e salva em cache dinamicamente as CDNs externas (Tailwind, Lu
+    // ESTRATÉGIA CACHE-FIRST: Intercepta e salva em cache dinamicamente as CDNs externas (Tailwind, Lucide, Google Fonts)
+    if (event.request.url.includes('tailwindcss') || event.request.url.includes('lucide') || event.request.url.includes('fonts')) {
+        event.respondWith(
+            caches.match(event.request).then((cachedResponse) => {
+                if (cachedResponse) return cachedResponse;
+                return fetch(event.request).then((networkResponse) => {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, responseClone);
+                    });
+                    return networkResponse;
+                }).catch(() => console.log('[Service Worker] Falha ao buscar CDN externa offline'));
+            })
+        );
+    } else {
+        // ESTRATÉGIA NETWORK-FIRST: Para os arquivos locais da aplicação (Garante atualizações imediatas ao commitar no GitHub)
+        event.respondWith(
+            fetch(event.request).catch(() => {
+                console.log('[Service Worker] Offline detectado. Servindo do cache local:', event.request.url);
+                return caches.match(event.request);
+            })
+        );
+    }
+});
