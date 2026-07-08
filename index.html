@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>iMesa</title>
+    <title>Check!</title>
     
     <!-- Open Graph / Prévia para WhatsApp e Redes Sociais -->
-    <meta property="og:title" content="iMesa">
-    <meta property="og:description" content="Acesse agora o Ecossistema Operacional do Sesc Mesa Brasil - Unidade Itaquera">
+    <meta property="og:title" content="Check! - Controle Operacional">
+    <meta property="og:description" content="Acesse agora o Controle Operacional do Sesc Mesa Brasil - Unidade Itaquera">
     <meta property="og:image" content="Icon512.png">
     <meta property="og:type" content="website">
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f8fafc">
-    <link rel="icon" type="image/png" href="Favicon.png">
+    <link class="rounded-xl" rel="icon" type="image/png" href="Favicon.png">
     <link rel="apple-touch-icon" href="Icon180.png">
     
     <!-- Fontes do Google: Plus Jakarta Sans e Dancing Script -->
@@ -38,10 +38,10 @@
 </head>
 <body class="bg-slate-50 overflow-hidden font-sans text-slate-800 antialiased select-none">
 
-    <!-- Iframe do GAS atualizado com permissões completas de hardware -->
+    <!-- Iframe do GAS com permissões completas de hardware -->
     <iframe 
         id="gas-frame"
-        src="https://script.google.com/macros/s/AKfycbx1ZsfNbofIF-ZPBmqurfNT9rQTU1UWqa7Tw3ttLlTrNYcVY9zcmOJQGrfGra8arHoO/exec" 
+        src="https://script.google.com/macros/s/AKfycbxHbJxYQMJHp6ZU8gCR-UeuKDvVv0pgmMv9SggXrfLDvqMlQbDUx2s76EhRkqqAwzRQ/exec" 
         class="absolute inset-0 w-full h-full border-none z-0"
         allow="geolocation *; clipboard-write *">
     </iframe>
@@ -86,7 +86,7 @@
                 </div>
 
                 <!-- Icone 4: Visão Geral (Amarelo) - Esquerda Inferior (216º) -->
-                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-500 rounded-2xl shadow-2xl shadow-amber-500/[0.65] flex items-center justify-center z-20" style="transform: translate(-32px, 45px);">
+                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-50 rounded-2xl shadow-2xl shadow-amber-500/[0.65] flex items-center justify-center z-20" style="transform: translate(-32px, 45px);">
                     <i data-lucide="bar-chart-3" class="text-white w-8 h-8"></i>
                 </div>
 
@@ -95,36 +95,31 @@
                     <i data-lucide="file-text" class="text-white w-8 h-8"></i>
                 </div>
 
-                <!-- PILAR 3: As Sombras Coloridas Dançantes (Aura) -->
-                <!-- Elas começam ocultas e se revelarão atrás do SVG realizando um giro contínuo lento -->
-                <div id="glow-container" class="absolute w-48 h-48 flex items-center justify-center pointer-events-none transition-all duration-1000 hidden opacity-0 z-10 animate-spin-slow">
-                    <div class="absolute w-20 h-20 rounded-full bg-blue-500/35 blur-2xl" style="transform: translate(0px, -45px);"></div>
-                    <div class="absolute w-20 h-20 rounded-full bg-emerald-500/35 blur-2xl" style="transform: translate(42px, -14px);"></div>
-                    <div class="absolute w-20 h-20 rounded-full bg-fuchsia-500/35 blur-2xl" style="transform: translate(26px, 36px);"></div>
-                    <div class="absolute w-20 h-20 rounded-full bg-amber-500/35 blur-2xl" style="transform: translate(-26px, 36px);"></div>
-                    <div class="absolute w-20 h-20 rounded-full bg-red-500/35 blur-2xl" style="transform: translate(-42px, -14px);"></div>
+                <!-- As Sombras Coloridas Dançantes (Aura) -->
+                <!-- As 5 luzes estão posicionadas no raio orbital externo de 65px com transição suave estendida para 2 segundos -->
+                <div id="glow-container" class="absolute w-48 h-48 flex items-center justify-center pointer-events-none transition-opacity duration-[2000ms] hidden opacity-0 z-10 animate-spin-slow">
+                    <!-- Luz Azul (Aparelhos) - Topo -->
+                    <div class="absolute w-20 h-20 rounded-full bg-blue-500/35 blur-2xl" style="transform: translate(0px, -65px);"></div>
+                    <!-- Luz Verde (Lavagem) - Direita Superior -->
+                    <div class="absolute w-20 h-20 rounded-full bg-emerald-500/35 blur-2xl" style="transform: translate(62px, -20px);"></div>
+                    <!-- Luz Fúcsia (Ways) - Direita Inferior -->
+                    <div class="absolute w-20 h-20 rounded-full bg-fuchsia-500/35 blur-2xl" style="transform: translate(38px, 53px);"></div>
+                    <!-- Luz Amarela (Dashboard) - Esquerda Inferior -->
+                    <div class="absolute w-20 h-20 rounded-full bg-amber-500/35 blur-2xl" style="transform: translate(-38px, 53px);"></div>
+                    <!-- Luz Vermelha (Relatórios) - Esquerda Superior -->
+                    <div class="absolute w-20 h-20 rounded-full bg-red-500/35 blur-2xl" style="transform: translate(-62px, -20px);"></div>
                 </div>
 
-                <!-- O Novo Alvo Final de Fusão: O Logo "iM" Monograma SVG Solto (Sem card de fundo) -->
-                <div id="icon-check" class="actor absolute w-64 h-64 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
-                    <svg viewBox="216.8177 30.7488 232.3323 186.3397" class="w-56 h-56 relative" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <!-- O Gradiente de Energia Neon que se deslocará pelo traçado do monograma -->
-                            <linearGradient id="energy-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#020f3d" />
-                                <stop id="pulse-stop" offset="0%" stop-color="#00f0ff">
-                                    <animate id="pulse-anim" attributeName="offset" values="0; 1" dur="1.3s" repeatCount="1" fill="freeze" begin="indefinite" />
-                                </stop>
-                                <stop offset="100%" stop-color="#020f3d" />
-                            </linearGradient>
-                        </defs>
+                <!-- O Novo Alvo Final de Fusão: O Logo "iM" Monograma SVG Solto e Reduzido (Tamanho w-36 com sombra de contorno vetorial aplicada) -->
+                <div id="icon-check" class="actor absolute w-44 h-44 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
+                    <svg viewBox="216.8177 30.7488 232.3323 186.3397" class="w-36 h-36 relative drop-shadow-[0_10px_25px_rgba(2,15,61,0.22)]" xmlns="http://www.w3.org/2000/svg">
                         
-                        <!-- Pingo do 'i' (Ciano Sesc Fixo) -->
+                        <!-- Pingo do 'i' (Animação Cíclica Ativa) -->
                         <g transform="matrix(2.0419120788574214, 0, 0, 2.010004997253418, -445.78475324110303, 16.383588560075474)">
-                            <circle cx="331.003" cy="36.786" r="6.502" class="text-cyan-400 fill-current" style="stroke-width: 1;" />
+                            <circle cx="331.003" cy="36.786" r="6.502" class="animate-dot-cycle" style="stroke-width: 1;" />
                         </g>
                         
-                        <!-- Monograma Fluido (Preenchido com o Gradiente de Energia) -->
+                        <!-- Monograma Fluido (Preenchimento com Azul-Marinho Sólido #020f3d) -->
                         <path d="
                             M 222.853 124.961 
                             C 222.853 119.332 231.872 116.392 237.153 119.502 
@@ -152,7 +147,7 @@
                             C 318.468 233.259 233.584 230.623 223.323 177.282 
                             L 222.853 124.961
                         " 
-                        fill="url(#energy-pulse)" 
+                        fill="#020f3d" 
                         style="stroke-width: 1;" 
                         transform="matrix(1, 0, 0, 1, 0, -7.105427357601002e-15)" />
                     </svg>
