@@ -17,3 +17,15 @@
 .animate-spin-slow {
     animation: spin-slow 12s infinite linear;
 }
+
+/* Ciclo dinâmico de cores para o pingo do "i" (Passa a cada segundo pelas 5 cores do ecossistema) */
+@keyframes dotColorCycle {
+    0%, 100% { fill: #3b82f6; }   /* Sesc Blue (Aparelhos) */
+    20% { fill: #10b981; }        /* Emerald Green (Lavagem) */
+    40% { fill: #d946ef; }        /* Fuchsia (Ways) */
+    60% { fill: #f59e0b; }        /* Amber Yellow (Dashboard) */
+    80% { fill: #ef4444; }        /* Red (Relatórios) */
+}
+.animate-dot-cycle {
+    animation: dotColorCycle 5s infinite ease-in-out;
+}
