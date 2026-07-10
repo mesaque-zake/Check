@@ -1,5 +1,10 @@
-const CACHE_NAME = 'check-v5';
+// ========================================== 
+// SERVICE WORKER iMESA - MOTOR OFFLINE
+// ==========================================
 
+const CACHE_NAME = 'imesa-v1';
+
+// O "App Shell": Tudo que o PWA precisa para a coreografia inicial e a tela offline
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -9,24 +14,28 @@ const ASSETS_TO_CACHE = [
     './Favicon.png',
     './Icon180.png',
     './Icon192.png',
-    './Icon512.png'
+    './Icon512.png',
+    './Share.png'
 ];
 
-// ========================================== 
-// 1. INSTALAÇÃO DO SERVICE WORKER (Download do App Shell)
+// ==========================================
+// 1. INSTALAÇÃO (Download Seguro do App Shell)
 // ==========================================
 self.addEventListener('install', (event) => {
+    // Força o SW a assumir o controle imediatamente, sem esperar abas fecharem
+    self.skipWaiting();
+    
     event.waitUntil(
         caches.open(CACHE_NAME)
         .then((cache) => {
-            console.log('[Service Worker] Fazendo cache do App Shell local...');
+            console.log('[Service Worker] Cacheando o Core do iMesa...');
             return cache.addAll(ASSETS_TO_CACHE);
         })
     );
 });
 
 // ==========================================
-// 2. ATIVAÇÃO DO SERVICE WORKER (Limpeza de Caches Antigos)
+// 2. ATIVAÇÃO (Limpeza de resíduos de versões antigas)
 // ==========================================
 self.addEventListener('activate', (event) => {
     event.waitUntil(
@@ -34,38 +43,46 @@ self.addEventListener('activate', (event) => {
             return Promise.all(
                 cacheNames.map((cache) => {
                     if (cache !== CACHE_NAME) {
-                        console.log('[Service Worker] Removendo cache antigo:', cache);
+                        console.log('[Service Worker] Purgando cache obsoleto:', cache);
                         return caches.delete(cache);
                     }
                 })
             );
         })
     );
+    // Garante que o SW controle os clientes (abas) na primeira carga
+    return self.clients.claim();
 });
 
 // ==========================================
-// 3. INTERCEPTAÇÃO DE REDE (FETCH STRATEGIES)
+// 3. ESTRATÉGIAS DE INTERCEPTAÇÃO (FETCH)
 // ==========================================
 self.addEventListener('fetch', (event) => {
-    // ESTRATÉGIA CACHE-FIRST: Intercepta e salva em cache dinamicamente as CDNs externas (Tailwind, Lucide, Google Fonts)
-    if (event.request.url.includes('tailwindcss') || event.request.url.includes('lucide') || event.request.url.includes('fonts')) {
+    const url = event.request.url;
+
+    // ESTRATÉGIA CACHE-FIRST: Para dependências externas pesadas (Tailwind, Lucide e Google Fonts)
+    // Isso garante que a tela offline tenha as fontes e os ícones perfeitos, mesmo sem rede.
+    if (url.includes('tailwindcss') || url.includes('lucide') || url.includes('fonts.googleapis.com') || url.includes('fonts.gstatic.com')) {
         event.respondWith(
             caches.match(event.request).then((cachedResponse) => {
                 if (cachedResponse) return cachedResponse;
+                
                 return fetch(event.request).then((networkResponse) => {
                     const responseClone = networkResponse.clone();
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(event.request, responseClone);
                     });
                     return networkResponse;
-                }).catch(() => console.log('[Service Worker] Falha ao buscar CDN externa offline'));
+                }).catch((err) => console.log('[Service Worker] Falha ao buscar CDN externa offline:', err));
             })
         );
-    } else {
-        // ESTRATÉGIA NETWORK-FIRST: Para os arquivos locais da aplicação (Garante atualizações imediatas ao commitar no GitHub)
+    } 
+    // ESTRATÉGIA NETWORK-FIRST: Para os arquivos locais (index, css, js)
+    // Garante que quando você fizer um push pro GitHub, o usuário veja na hora. Se cair a internet, ele puxa do cache local.
+    else {
         event.respondWith(
             fetch(event.request).catch(() => {
-                console.log('[Service Worker] Offline detectado. Servindo do cache local:', event.request.url);
+                console.log('[Service Worker] Rede inativa. Servindo do cache de segurança:', url);
                 return caches.match(event.request);
             })
         );
