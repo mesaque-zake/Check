@@ -1,7 +1,7 @@
 /**
  * ==========================================
  * MOTOR LÓGICO PRINCIPAL DO PWA (CORE)
- * ORQUESTRADOR DA MUTAÇÃO E VÓRTICE (V7)
+ * A COREOGRAFIA DO PLANO B (VÓRTICE DO FUNDO)
  * ==========================================
  */
 
@@ -9,27 +9,27 @@ let iframeLoaded = false;
 let deferredPrompt = null;
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// Monitorização do carregamento do GAS no segundo plano
+// Monitorização silenciosa do GAS no background
 window.addEventListener('DOMContentLoaded', () => {
     const iframe = document.getElementById('gas-frame');
     if (iframe) {
         iframe.addEventListener('load', () => {
-            console.log("[PWA] Sistema operacional carregado em background.");
+            console.log("[PWA] Sistema operacional GAS carregado na sombra.");
             iframeLoaded = true;
         });
     }
 });
 
 // ==========================================
-// COREOGRAFIA DE ABERTURA CINEMATOGRÁFICA
+// COREOGRAFIA DE ABERTURA E MUTAÇÃO
 // ==========================================
 async function playOpeningSequence() {
-    console.log("[PWA] Início da sequência de animação...");
+    console.log("[PWA] Iniciando a dança do ecossistema...");
     
     try {
         lucide.createIcons();
 
-        // Mapeamento dos Atores da Dança Inicial
+        // Mapeamento: Atores da Dança (Grade 6x8)
         const iA = document.getElementById('icon-A');
         const iB = document.getElementById('icon-B');
         const iC = document.getElementById('icon-C');
@@ -39,17 +39,12 @@ async function playOpeningSequence() {
         const iG = document.getElementById('icon-G');
         const iH = document.getElementById('icon-H');
         
-        // Mapeamento do Bloco Monolítico e Elementos de Mutação
-        const monolith = document.getElementById('monolith-brand');
-        const monoSesc = document.getElementById('mono-sesc');
-        const monoBrasil = document.getElementById('mono-brasil');
+        // Mapeamento: O Grand Finale
+        const monolithBrand = document.getElementById('monolith-brand');
         const imesaText = document.getElementById('mono-imesa-text');
-        const imesaI = document.getElementById('mono-i');
-        const imesaM = document.getElementById('mono-M');
-        const esaWrapper = document.getElementById('mono-esa-wrapper');
-        const cardBg = document.getElementById('mono-card-bg');
-        
         const glowContainer = document.getElementById('glow-container');
+        const officialIcon = document.getElementById('official-icon-card');
+        
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
@@ -70,7 +65,7 @@ async function playOpeningSequence() {
         }
         await sleep(400);
 
-        // --- ATO 3: Lavagem (B) e Visão Geral (C) Criam o Quadrado Perfeito 2x2 ---
+        // --- ATO 3: Lavagem (B) e Visão (C) fecham o Quadrado 2x2 ---
         iB.style.opacity = '1';
         iB.style.transform = 'translate(-30px, 30px) scale(1)';
         iC.style.opacity = '1';
@@ -80,42 +75,40 @@ async function playOpeningSequence() {
         iA.style.transform = 'translate(30px, 30px) scale(1)';
         await sleep(500);
 
-        // --- ATO 4: Cascata Elástica Rápida (Dispersão na Grade 6x8) ---
-        // 4.1 Relatórios (H) brota e empurra Ways (D)
+        // --- ATO 4: A Cascata Elástica (Dispersão na Grade) ---
+        // Relatórios (H)
         iH.style.opacity = '1';
         iH.style.transform = 'translate(-30px, -30px) scale(1)';
         iD.style.transform = 'translate(-90px, -30px) scale(1)';
         await sleep(150);
 
-        // 4.2 Admin (G) brota e empurra Visão Geral (C) para o topo
+        // Admin (G)
         iG.style.opacity = '1';
         iG.style.transform = 'translate(30px, -30px) scale(1)';
         iC.style.transform = 'translate(30px, -90px) scale(1)';
         await sleep(150);
 
-        // 4.3 Reembolsos (E) brota e empurra Lavagem (B) para a base
+        // Reembolsos (E)
         iE.style.opacity = '1';
         iE.style.transform = 'translate(-30px, 30px) scale(1)';
         iB.style.transform = 'translate(-30px, 90px) scale(1)';
         await sleep(150);
 
-        // 4.4 Mini Games (F) brota e empurra Aparelhos (A) para a extremidade direita
+        // Mini Games (F)
         iF.style.opacity = '1';
         iF.style.transform = 'translate(30px, 30px) scale(1)';
         iA.style.transform = 'translate(90px, 30px) scale(1)';
         await sleep(700);
 
         // ==========================================
-        // TRATAMENTO EXCLUSIVO: GATILHO OFFLINE
+        // GATILHO OFFLINE: SHATTER
         // ==========================================
         if (!navigator.onLine) {
-            console.log("[PWA] Conexão ausente. Ativando Shatter Offline...");
+            console.log("[PWA] Queda de rede. Invocando shatter offline...");
             
-            // 1. Dreno de Energia (Congelamento e Dessaturação)
             [iA, iB, iC, iD, iE, iF, iG, iH].forEach(icon => icon.classList.add('freeze'));
             await sleep(800);
 
-            // 2. O Estilhaço Violento (Shatter) para as extremidades da tela
             [iA, iB, iC, iD, iE, iF, iG, iH].forEach(icon => icon.classList.add('shatter'));
             
             iD.style.transform = 'translate(-260px, -140px) rotate(-135deg) scale(0.5)';
@@ -127,22 +120,23 @@ async function playOpeningSequence() {
             iB.style.transform = 'translate(-110px, 290px) rotate(-165deg) scale(0.5)';
             iF.style.transform = 'translate(140px, 240px) rotate(85deg) scale(0.5)';
 
-            // 3. Revelação do Painel de Conexão Centralizado
             offlineAlert.classList.remove('hidden');
             await sleep(50);
             offlineAlert.classList.remove('opacity-0', 'scale-95');
             offlineAlert.classList.add('opacity-100', 'scale-100');
-            return; // Bloqueia a progressão dos próximos atos online
+            return; 
         }
 
-        // --- ATO 5: Colapso Gravitacional Inicial ---
+        // --- ATO 5: A Implosão dos 8 Ícones ---
         [iA, iB, iC, iD, iE, iF, iG, iH].forEach(icon => {
             icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0)';
             icon.style.opacity = '0';
         });
-        await sleep(350);
+        
+        // Sobreposição de tempo para não haver "corte seco"
+        await sleep(350); 
 
-        // --- ATO 6: Explosão de Energia e Revelação da Marca Fiel ao Design ---
+        // --- ATO 6: A Revelação do Monolito e da Energia ---
         if (glowContainer) {
             glowContainer.classList.remove('hidden');
             setTimeout(() => {
@@ -151,82 +145,82 @@ async function playOpeningSequence() {
             }, 50);
         }
 
-        if (monolith) {
-            monolith.style.opacity = '1';
-            monolith.style.transform = 'scale(1)';
-            
-            // Suaviza a entrada das marcas d'água aproximando-as do centro real
-            monoSesc.style.transform = 'translateY(0px)';
-            monoBrasil.style.transform = 'translateY(0px)';
+        if (monolithBrand) {
+            monolithBrand.style.opacity = '1';
+            monolithBrand.style.transform = 'scale(1)';
         }
-        await sleep(1200); // Tempo de exposição da marca monolítica unificada
 
-        // --- ATO 7: Instabilidade Tecnológica (Glitch de Sobrecarga) ---
+        // Sincronização obrigatória: Espera o GAS carregar no fundo antes de prosseguir
+        let timeoutCounter = 0;
+        while (!iframeLoaded && timeoutCounter < 30) {
+            console.log("[PWA] Aguardando servidores do Google...");
+            await sleep(500);
+            timeoutCounter++;
+        }
+        await sleep(1200); // Tempo para o usuário apreciar o design da marca
+
+        // --- ATO 7: Sobrecarga (O Gatilho) ---
         if (imesaText) {
             imesaText.classList.add('animate-imesa-overload');
         }
         await sleep(400);
 
-        // --- ATO 8: O Vórtice Gravitacional Reverso ---
-        // O Texto do iMESA puxa o Sesc, o Brasil e a nuvem cromática para dentro de si
-        monoSesc.style.transform = 'scale(0) translateY(40px)';
-        monoSesc.style.opacity = '0';
+        // --- ATO 8: O VÓRTICE REVERSO (REVELAÇÃO DO GAS) ---
+        console.log("[PWA] Vórtice ativado. Rasgando o fundo...");
         
-        monoBrasil.style.transform = 'scale(0) translateY(-40px)';
-        monoBrasil.style.opacity = '0';
+        // Suga o Texto e a Nuvem de Energia para o marco zero
+        monolithBrand.style.transform = 'scale(0)';
+        monolithBrand.style.opacity = '0';
         
-        if (glowContainer) {
-            glowContainer.style.transform = 'scale(0) rotate(360deg)';
-            glowContainer.style.opacity = '0';
-        }
-        await sleep(500);
-
-        // --- ATO 9: A Mutação Física e Compressão Limpa ---
-        // Desliga o glitch de sobrecarga do bloco e remove a largura do wrapper "ESA"
-        imesaText.classList.remove('animate-imesa-overload');
-        esaWrapper.style.maxWidth = '0px'; 
-        esaWrapper.style.opacity = '0';
-
-        // No mesmo instante, o Card Azul brota por trás e as letras residuais mudam para branco puro
-        cardBg.classList.add('icon-card-expanded');
-        imesaI.classList.add('text-white-mutated');
-        imesaM.classList.add('text-white-mutated');
-        await sleep(700);
-
-        // Sincronização final com a resposta dos servidores do Google
-        let timeoutCounter = 0;
-        while (!iframeLoaded && timeoutCounter < 30) {
-            console.log("[PWA] A aguardar estabilização dos serviços...");
-            await sleep(500);
-            timeoutCounter++;
-        }
-        await sleep(200);
-
-        // --- ATO 10: Implosão Final do Fundo e Entrada no GAS ---
-        loader.style.transition = 'transform 0.6s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease-in-out, scale 0.6s cubic-bezier(0.85, 0, 0.15, 1)';
-        loader.style.transform = 'scale(0)';
-        loader.style.opacity = '0';
+        glowContainer.style.transform = 'scale(0) rotate(540deg)';
+        glowContainer.style.opacity = '0';
         
-        setTimeout(() => {
-            loader.style.pointerEvents = 'none';
-            loader.classList.add('hidden');
-        }, 600);
+        // Suga a Assinatura
+        if (signature) signature.style.opacity = '0';
+
+        // O GRANDE TRUQUE: Deixa o fundo branco transparente, revelando o GAS imediatamente
+        loader.classList.remove('bg-slate-50');
+        loader.classList.add('bg-transparent');
+        
+        await sleep(300); // Exato momento em que tudo esmagou no centro
+
+        // --- ATO 9: O Selo Oficial do iMesa (Sobre o GAS) ---
+        // O Ícone "estoura" de dentro do vórtice, já com a interface escura ao fundo
+        officialIcon.style.opacity = '1';
+        officialIcon.style.transform = 'scale(1.15)';
+        await sleep(150); // Efeito de estilingue
+        officialIcon.style.transform = 'scale(1)';
+        
+        // Tempo que o ícone oficial reinará na tela dizendo "Estou pronto"
+        await sleep(750);
+
+        // --- ATO 10: Trabalho Feito ---
+        // O Ícone encolhe super rápido, limpando o palco
+        officialIcon.style.transition = 'transform 0.3s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.3s ease-in-out';
+        officialIcon.style.transform = 'scale(0)';
+        officialIcon.style.opacity = '0';
+        
+        await sleep(300);
+
+        // Desliga a cortina invisível para liberar o toque na tela do GAS
+        loader.style.pointerEvents = 'none';
+        loader.classList.add('hidden');
 
     } catch (error) {
-        console.error("Falha na execução da coreografia física:", error);
+        console.error("Falha no motor lógico:", error);
         const loader = document.getElementById('loader-screen');
         if (loader) loader.style.display = 'none';
     }
 }
 
 // ==========================================
-// INFRAESTRUTURA NATIVA DE INSTALAÇÃO
+// INFRAESTRUTURA DE INSTALAÇÃO
 // ==========================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('Blindagem offline ativa: ', reg.scope))
-            .catch(err => console.log('Falha no registo do SW: ', err));
+            .then(reg => console.log('SW Operacional: ', reg.scope))
+            .catch(err => console.log('Falha no SW: ', err));
     }
 }
 
@@ -243,8 +237,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 window.installPWA = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`Resposta da instalação: ${outcome}`);
+    await deferredPrompt.userChoice;
     deferredPrompt = null;
     const installBtn = document.getElementById('install-btn');
     if (installBtn) {
@@ -292,7 +285,7 @@ window.addEventListener('message', (event) => {
     }
 });
 
-// Inicialização Geral do Sistema
+// Boot Geral
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         playOpeningSequence();
