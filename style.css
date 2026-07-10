@@ -1,9 +1,18 @@
-/* Transição fluida e elástica para os movimentos do Pentágono */
+/* ==========================================
+   MÓDULO DE ESTILOS E FÍSICAS DE ANIMAÇÃO
+   ========================================== */
+
+/* Regras Globais */
+body {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Transição fluida e elástica (easeOutBack) para os movimentos do Pentágono */
 .actor {
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Efeito de Congelamento Offline (Dessaturação e Opacidade) */
+/* Efeito de Congelamento Offline (Dessaturação, Opacidade e Desaceleração) */
 .freeze {
     filter: grayscale(100%) opacity(40%);
     transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -28,4 +37,108 @@
 }
 .animate-dot-cycle {
     animation: dotColorCycle 5s infinite ease-in-out;
+}
+
+/* --- MONOGRAMA "iM": ANIMAÇÕES DE GLITCH SUTIL E INTERATIVO --- */
+
+/* Animação padrão do pingo do "i": Sutil (0.25s de duração a cada 5s) */
+.animate-i-glitch {
+    animation: iGlitchSesc 5s infinite;
+}
+
+@keyframes iGlitchSesc {
+    0%, 94%, 100% {
+        transform: translate(0, 0);
+        text-shadow: none;
+    }
+    95% {
+        transform: translate(-1px, 0.5px);
+        text-shadow: -1px -0.5px 0 rgba(59, 130, 246, 0.75), 1px 0.5px 0 rgba(239, 68, 68, 0.75);
+    }
+    96% {
+        transform: translate(1px, -0.5px);
+        text-shadow: 1px 0.5px 0 rgba(59, 130, 246, 0.7), -1px -0.5px 0 rgba(239, 68, 68, 0.7);
+    }
+    97%, 99% {
+        transform: translate(0, 0);
+        text-shadow: none;
+    }
+}
+
+/* Interatividade: Ao passar o mouse ou tocar no Card Azul-Marinho, o "i" vibra continuamente */
+#monogram-card:hover .animate-i-glitch,
+#monogram-card:active .animate-i-glitch {
+    animation: iVibrarContinuo 0.15s infinite linear;
+    cursor: pointer;
+}
+
+@keyframes iVibrarContinuo {
+    0%, 100% { transform: translate(0, 0); text-shadow: -1px 0 rgba(59, 130, 246, 0.9), 1.5px 0 rgba(239, 68, 68, 0.95); }
+    25% { transform: translate(-1px, 0.5px); text-shadow: -1.5px 0.5px rgba(59, 130, 246, 0.9), 1px -0.5px rgba(239, 68, 68, 0.95); }
+    50% { transform: translate(1px, -1px); text-shadow: 1px -1px rgba(59, 130, 246, 0.9), -1.5px 1px rgba(239, 68, 68, 0.95); }
+    75% { transform: translate(-0.5px, -0.5px); text-shadow: -0.5px -0.5px rgba(59, 130, 246, 0.9), 1px 1px rgba(239, 68, 68, 0.95); }
+}
+
+/* --- TÍTULO PRINCIPAL "iMESA": ANIMAÇÕES DE GLITCH SUTIL E INTERATIVO --- */
+
+/* Animação padrão do título: Sutil (0.25s de duração a cada 5s) */
+.animate-imesa-glitch {
+    animation: imesaGlitchSesc 5s infinite;
+}
+
+@keyframes imesaGlitchSesc {
+    0%, 94%, 100% {
+        text-shadow: none;
+        transform: translate(0, 0);
+    }
+    95% {
+        text-shadow: -2px -0.5px 0 rgba(59, 130, 246, 0.75), 2px 0.5px 0 rgba(239, 68, 68, 0.75);
+        transform: translate(-1.5px, 0.5px);
+    }
+    96% {
+        text-shadow: 2px 0.5px 0 rgba(59, 130, 246, 0.7), -2px -0.5px 0 rgba(239, 68, 68, 0.7);
+        transform: translate(1.5px, -0.5px);
+    }
+    97% {
+        text-shadow: -1px 0.5px 0 rgba(59, 130, 246, 0.75), 1px -0.5px 0 rgba(239, 68, 68, 0.75);
+        transform: translate(-0.5px, -0.2px);
+    }
+    98%, 99% {
+        text-shadow: none;
+        transform: translate(0, 0);
+    }
+}
+
+/* Interatividade: Ao passar o mouse ou segurar o dedo no "iMESA", ele entra em glitch vibrante contínuo */
+#brand-title:hover,
+#brand-title:active {
+    animation: heavyGlitchSesc 0.15s infinite linear;
+    cursor: pointer;
+}
+
+@keyframes heavyGlitchSesc {
+    0% {
+        text-shadow: -3px -1.5px 0 rgba(59, 130, 246, 0.95), 3px 1.5px 0 rgba(239, 68, 68, 0.95);
+        transform: translate(-2px, 1px) skewX(2deg);
+    }
+    20% {
+        text-shadow: 3px 1.5px 0 rgba(59, 130, 246, 0.95), -3px -1.5px 0 rgba(239, 68, 68, 0.95);
+        transform: translate(2px, -1px) skewX(-2deg);
+    }
+    40% {
+        text-shadow: -2px 2px 0 rgba(59, 130, 246, 0.95), 2px -2px 0 rgba(239, 68, 68, 0.95);
+        transform: translate(-1px, -2px);
+    }
+    60% {
+        text-shadow: 2px -2.5px 0 rgba(59, 130, 246, 0.95), -2px 2.5px 0 rgba(239, 68, 68, 0.95);
+        transform: translate(2px, 1.5px) skewX(1deg);
+    }
+    80% {
+        text-shadow: -3px 1px 0 rgba(59, 130, 246, 0.95), 3px -1px 0 rgba(239, 68, 68, 0.95);
+        transform: translate(-1.5px, 1px);
+    }
+    100% {
+        text-shadow: none;
+        transform: translate(0, 0);
+    }
 }
