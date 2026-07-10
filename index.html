@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Check!</title>
+    <title>Sesc iMesa Brasil</title>
     
-    <!-- Open Graph / Prévia para WhatsApp e Redes Sociais -->
+    <!-- Open Graph / Prévia de Redes Sociais -->
     <meta property="og:title" content="iMesa">
-    <meta property="og:description" content="Acesse agora o Ecossistema Operacional do Sesc Mesa Brasil - Unidade Itaquera">
+    <meta property="og:description" content="Acesse o Ecossistema Operacional do Sesc Mesa Brasil - Unidade Itaquera">
     <meta property="og:image" content="Icon512.png">
     <meta property="og:type" content="website">
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f8fafc">
-    <link class="rounded-xl" rel="icon" type="image/png" href="Favicon.png">
+    <link rel="icon" type="image/png" href="Favicon.png">
     <link rel="apple-touch-icon" href="Icon180.png">
     
-    <!-- Fontes do Google: Plus Jakarta Sans e Dancing Script -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <!-- Fontes do Google: Plus Jakarta Sans, Dancing Script e Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,7 +29,8 @@
                 extend: {
                     fontFamily: { 
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        dancing: ['"Dancing Script"', 'cursive']
+                        dancing: ['"Dancing Script"', 'cursive'],
+                        montserrat: ['"Montserrat"', 'sans-serif']
                     }
                 }
             }
@@ -41,16 +42,18 @@
     <!-- Iframe do GAS com permissões completas de hardware -->
     <iframe 
         id="gas-frame"
-        src="https://script.google.com/macros/s/AKfycbyR4X_MyDpdvWZMtWNV8A655nfXAlHuz_dv8qYsRiG4TSNy__NpnNREGjPKbbIooqIU/exec" 
+        src="https://script.google.com/macros/s/AKfycbzEOZzvFYvwESMxk7ZcWSL4P0zvssqSiscWl0fzn5eb-15OQWzDgBrj9XU0C5fZGTXR/exec" 
         class="absolute inset-0 w-full h-full border-none z-0"
         allow="geolocation *; clipboard-write *">
     </iframe>
 
+    <!-- Botão de Instalação do PWA -->
     <button id="install-btn" onclick="installPWA()" class="absolute bottom-6 right-6 md:bottom-10 md:right-10 bg-slate-800 hover:bg-slate-700 text-white px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 z-40 hidden opacity-0 translate-y-10 transition-all duration-500">
         <i data-lucide="download" class="w-5 h-5"></i>
         <span class="font-semibold text-sm">Instalar App</span>
     </button>
 
+    <!-- Balão de Instruções para iOS (Apple) -->
     <div id="ios-prompt" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-[90%] max-w-sm bg-white p-4 rounded-2xl shadow-2xl z-40 hidden opacity-0 translate-y-10 transition-all duration-500 flex flex-col items-center text-center gap-2 border border-slate-100">
         <button onclick="document.getElementById('ios-prompt').classList.add('hidden')" class="absolute top-2 right-2 text-slate-400 hover:text-slate-600 transition-colors">
             <i data-lucide="x" class="w-4 h-4"></i>
@@ -61,108 +64,98 @@
         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-r border-b border-slate-100"></div>
     </div>
 
-    <!-- Tela do Carregador (Loader) -->
+    <!-- Tela do Carregador (Loader / Splash Screen) -->
     <div id="loader-screen" class="absolute inset-0 bg-slate-50 z-50 flex flex-col items-center justify-center transition-opacity duration-1000">
         
         <!-- Wrapper Centralizador -->
         <div class="relative flex flex-col items-center justify-center z-20">
             
-            <!-- Contêiner de Ícones em Pentágono -->
+            <!-- Contêiner de Ícones (Pentágono e Fusoes) -->
             <div class="relative w-48 h-48 flex items-center justify-center transform transition-transform duration-700 md:scale-125">
                 
-                <!-- Icone 1: Aparelhos (Azul) - Topo (0º) (Sombra v3 corrigida) -->
-                <div id="icon-1" class="actor absolute w-16 h-16 bg-blue-600 rounded-2xl shadow-2xl shadow-blue-600/50 flex items-center justify-center z-20" style="transform: translate(0px, -55px);">
-                    <i data-lucide="smartphone" class="text-white w-8 h-8"></i>
+                <!-- ÍCONES OPERACIONAIS (Iniciam camuflados no ponto zero para a cascata do Ato 1 e 4) -->
+                
+                <!-- Icone A: Aparelhos (Azul) -->
+                <div id="icon-1" class="actor absolute w-14 h-14 bg-blue-600 rounded-2xl shadow-lg shadow-blue-600/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="smartphone" class="text-white w-7 h-7"></i>
                 </div>
                 
-                <!-- Icone 2: Lavagem (Verde) - Direita Superior (72º) (Sombra v3 corrigida) -->
-                <div id="icon-2" class="actor absolute w-16 h-16 bg-emerald-600 rounded-2xl shadow-2xl shadow-emerald-600/50 flex items-center justify-center z-20" style="transform: translate(52px, -17px);">
-                    <i data-lucide="droplets" class="text-white w-8 h-8"></i>
+                <!-- Icone B: Lavagem (Verde Emerald) -->
+                <div id="icon-2" class="actor absolute w-14 h-14 bg-emerald-600 rounded-2xl shadow-lg shadow-emerald-600/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="droplets" class="text-white w-7 h-7"></i>
                 </div>
 
-                <!-- Icone 3: Ways (Fúcsia 800) - Direita Inferior (144º) (Sombra v3 corrigida) -->
-                <div id="icon-5" class="actor absolute w-16 h-16 bg-fuchsia-800 rounded-2xl shadow-2xl shadow-fuchsia-800/50 flex items-center justify-center z-20 font-dancing" style="transform: translate(32px, 45px);">
-                    <span class="text-white text-3xl font-bold leading-none mt-1 select-none">W</span>
+                <!-- Icone C: Visão Geral (Amarelo Amber) -->
+                <div id="icon-3" class="actor absolute w-14 h-14 bg-amber-500 rounded-2xl shadow-lg shadow-amber-500/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="bar-chart-3" class="text-white w-7 h-7"></i>
                 </div>
 
-                <!-- Icone 4: Visão Geral (Amarelo) - Esquerda Inferior (216º) (Sombra v3 corrigida) -->
-                <div id="icon-3" class="actor absolute w-16 h-16 bg-amber-500 rounded-2xl shadow-2xl shadow-amber-500/50 flex items-center justify-center z-20" style="transform: translate(-32px, 45px);">
-                    <i data-lucide="bar-chart-3" class="text-white w-8 h-8"></i>
+                <!-- Icone D: Ways (Fúcsia) - "W" em Dancing Script -->
+                <div id="icon-5" class="actor absolute w-14 h-14 bg-fuchsia-800 rounded-2xl shadow-lg shadow-fuchsia-800/30 flex items-center justify-center z-20 font-dancing opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <span class="text-white text-2xl font-bold leading-none mt-1 select-none">W</span>
                 </div>
 
-                <!-- Icone 5: Relatórios (Vermelho) - Esquerda Superior (288º) (Sombra v3 corrigida) -->
-                <div id="icon-4" class="actor absolute w-16 h-16 bg-red-600 rounded-2xl shadow-2xl shadow-red-600/50 flex items-center justify-center z-20" style="transform: translate(-52px, -17px);">
-                    <i data-lucide="file-text" class="text-white w-8 h-8"></i>
+                <!-- Icone E: Reembolsos (Laranja) -->
+                <div id="icon-6" class="actor absolute w-14 h-14 bg-orange-500 rounded-2xl shadow-lg shadow-orange-500/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="receipt" class="text-white w-7 h-7"></i>
                 </div>
 
-                <!-- As Sombras Coloridas Dançantes (Aura Cósmica com espalhamento equilibrado de 85px e opacidade translúcida de 25%) -->
+                <!-- Icone F: Mini Games (Rosa Rose) -->
+                <div id="icon-7" class="actor absolute w-14 h-14 bg-rose-500 rounded-2xl shadow-lg shadow-rose-500/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="gamepad-2" class="text-white w-7 h-7"></i>
+                </div>
+
+                <!-- Icone G: Admin (Cinza Slate) -->
+                <div id="icon-8" class="actor absolute w-14 h-14 bg-slate-500 rounded-2xl shadow-lg shadow-slate-500/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="settings" class="text-white w-7 h-7"></i>
+                </div>
+
+                <!-- Icone H: Relatórios (Vermelho) -->
+                <div id="icon-4" class="actor absolute w-14 h-14 bg-red-600 rounded-2xl shadow-lg shadow-red-600/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="file-text" class="text-white w-7 h-7"></i>
+                </div>
+
+                <!-- AS 8 AURAS CÓSMICAS (Sombras curtas e bem definidas em rotação lenta) -->
                 <div id="glow-container" class="absolute w-72 h-72 flex items-center justify-center pointer-events-none transition-opacity duration-[2000ms] hidden opacity-0 z-10 animate-spin-slow">
-                    <!-- Sombra Azul (Aparelhos) - Topo -->
-                    <div class="absolute w-24 h-24 rounded-full bg-blue-500/25 blur-3xl" style="transform: translate(0px, -85px);"></div>
-                    <!-- Sombra Verde (Lavagem) - Direita Superior -->
-                    <div class="absolute w-24 h-24 rounded-full bg-emerald-500/25 blur-3xl" style="transform: translate(81px, -26px);"></div>
-                    <!-- Sombra Fúcsia (Ways) - Direita Inferior -->
-                    <div class="absolute w-24 h-24 rounded-full bg-fuchsia-500/25 blur-3xl" style="transform: translate(50px, 69px);"></div>
-                    <!-- Sombra Amarela (Dashboard) - Esquerda Inferior -->
-                    <div class="absolute w-24 h-24 rounded-full bg-amber-500/25 blur-3xl" style="transform: translate(-50px, 69px);"></div>
-                    <!-- Sombra Vermelha (Relatórios) - Esquerda Superior -->
-                    <div class="absolute w-24 h-24 rounded-full bg-red-500/25 blur-3xl" style="transform: translate(-81px, -26px);"></div>
+                    <!-- Sombra A (Aparelhos) - Azul -->
+                    <div id="glow-1" class="absolute w-14 h-14 rounded-full bg-blue-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra B (Lavagem) - Verde -->
+                    <div id="glow-2" class="absolute w-14 h-14 rounded-full bg-emerald-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra C (Visão Geral) - Amarela -->
+                    <div id="glow-3" class="absolute w-14 h-14 rounded-full bg-amber-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra D (Ways) - Fúcsia -->
+                    <div id="glow-5" class="absolute w-14 h-14 rounded-full bg-fuchsia-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra E (Reembolsos) - Laranja -->
+                    <div id="glow-6" class="absolute w-14 h-14 rounded-full bg-orange-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra F (Mini Games) - Rosa -->
+                    <div id="glow-7" class="absolute w-14 h-14 rounded-full bg-rose-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra G (Admin) - Cinza -->
+                    <div id="glow-8" class="absolute w-14 h-14 rounded-full bg-slate-500/35 blur-xl transition-transform duration-1000"></div>
+                    <!-- Sombra H (Relatórios) - Vermelha -->
+                    <div id="glow-4" class="absolute w-14 h-14 rounded-full bg-red-500/35 blur-xl transition-transform duration-1000"></div>
                 </div>
 
-                <!-- O Alvo Final de Fusão: O Logo "iM" Monograma SVG Solto e Reduzido (Tamanho w-28 no centro de w-36) -->
+                <!-- CARD DE FUSÃO "iM": Card Azul-Marinho carregando o novo monograma Montserrat -->
                 <div id="icon-check" class="actor absolute w-36 h-36 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
-                    <svg viewBox="216.8177 30.7488 232.3323 186.3397" class="w-28 h-28 relative drop-shadow-[0_10px_25px_rgba(2,15,61,0.22)]" xmlns="http://www.w3.org/2000/svg">
-                        
-                        <!-- Pingo do 'i' (Animação Cíclica Ativa) -->
-                        <g transform="matrix(2.0419120788574214, 0, 0, 2.010004997253418, -445.78475324110303, 16.383588560075474)">
-                            <circle cx="331.003" cy="36.786" r="6.502" class="animate-dot-cycle" style="stroke-width: 1;" />
-                        </g>
-                        
-                        <!-- Monograma Fluido (Preenchimento com o novo Azul-Marinho Escuro #020f3d) -->
-                        <path d="
-                            M 222.853 124.961 
-                            C 222.853 119.332 231.872 116.392 237.153 119.502 
-                            C 242.049 122.386 240.683 130.227 240.683 132.839 
-                            L 241.155 171.773 
-                            C 243.523 204.675 287.375 209.828 285.797 163.508 
-                            L 285.797 74.687 
-                            C 285.795 40.916 326.631 19.807 359.304 36.69 
-                            C 362.224 38.2 364.962 39.973 367.474 41.985 
-                            C 395.593 19.471 440.392 32.648 448.113 65.705 
-                            C 448.803 68.658 449.15 71.669 449.15 74.687 
-                            L 449.15 188.018 
-                            C 449.15 199.275 435.539 206.31 424.647 200.682 
-                            C 419.593 198.07 416.479 193.243 416.479 188.018 
-                            L 416.479 74.687 
-                            C 416.479 63.431 402.868 56.395 391.977 62.023 
-                            C 386.923 64.635 383.809 69.463 383.809 74.687 
-                            L 383.809 188.018 
-                            C 383.809 199.275 370.197 206.31 359.306 200.682 
-                            C 354.252 198.07 351.138 193.243 351.138 188.018 
-                            L 351.138 74.687 
-                            C 351.138 63.431 337.527 56.395 326.635 62.023 
-                            C 321.582 64.635 318.468 69.463 318.468 74.687 
-                            L 318.468 167.454 
-                            C 318.468 233.259 233.584 230.623 223.323 177.282 
-                            L 222.853 124.961
-                        " 
-                        fill="#020f3d" 
-                        style="stroke-width: 1;" 
-                        transform="matrix(1, 0, 0, 1, 0, -7.105427357601002e-15)" />
-                    </svg>
+                    <div id="monogram-card" class="w-16 h-16 bg-[#020f3d] rounded-2xl shadow-xl flex items-center justify-center font-montserrat text-lg text-white select-none transition-all duration-700">
+                        <span id="monogram-i" class="font-normal animate-i-glitch inline-block">i</span>
+                        <span id="monogram-M" class="font-extrabold ml-[0.5px]">M</span>
+                    </div>
                 </div>
 
             </div>
 
-            <div id="welcome-text" class="text-center mt-6 space-y-1 opacity-0 transform translate-y-4 transition-all duration-700">
-              <h1 class="text-3xl font-black text-slate-800 tracking-tight leading-none">Check!</h1>
-              <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Sesc Mesa Brasil</p>
+            <!-- BLOCO DE TEXTOS (SESC IMESA BRASIL) -->
+            <div id="welcome-text" class="text-center mt-6 space-y-1.5 opacity-0 transform translate-y-4 transition-all duration-700 font-montserrat select-none">
+              <span class="block text-slate-300 font-normal text-xs leading-none tracking-widest uppercase">Sesc</span>
+              <h1 id="brand-title" class="text-3xl font-black text-slate-800 tracking-tight leading-none">iMesa</h1>
+              <span class="block text-slate-300 font-normal text-[10px] tracking-widest uppercase mt-1">Brasil</span>
             </div>
             
         </div>
 
-        <!-- Alerta de Conexão Offline -->
-        <div id="offline-alert" class="absolute flex flex-col items-center opacity-0 transform transition-all duration-1000 hidden z-30">
+        <!-- ALERTA DE SEM CONEXÃO (Aparece no centro no Big Bang offline) -->
+        <div id="offline-alert" class="absolute flex flex-col items-center opacity-0 scale-95 transform transition-all duration-1000 hidden z-30">
             <i data-lucide="wifi-off" class="text-slate-400 w-10 h-10 mb-3"></i>
             <span class="text-xl font-bold text-slate-700 mb-4 tracking-tight">Sem Conexão</span>
             <button onclick="window.location.reload()" class="px-6 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-full shadow-sm transition-all active:scale-95 focus:outline-none">
