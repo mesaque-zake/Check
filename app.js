@@ -1,7 +1,7 @@
 /**
  * ==========================================
  * MOTOR LÓGICO PRINCIPAL DO PWA (CORE)
- * VERSÃO CINEMÁTICA ULTRA-OTIMIZADA
+ * VERSÃO CINEMÁTICA ULTRA-OTIMIZADA (CAPRICHO)
  * ==========================================
  */
 
@@ -40,7 +40,6 @@ async function playOpeningSequence() {
         const i8 = document.getElementById('icon-8'); // Admin (G)
         
         const check = document.getElementById('icon-check'); // Monograma Card (X)
-        const welcome = document.getElementById('welcome-text');
         const welcomeSesc = document.getElementById('welcome-sesc');
         const welcomeBrasil = document.getElementById('welcome-brasil');
         const signature = document.getElementById('signature');
@@ -61,8 +60,8 @@ async function playOpeningSequence() {
 
         // --- ATO 2: Aparelhos (A) brota e empurra. Signature (Mesaque) surge. ---
         i1.style.opacity = '1';
-        i1.style.transform = 'translate(40px, 0px) scale(1)';
-        i5.style.transform = 'translate(-40px, 0px) scale(1)';
+        i1.style.transform = 'translate(30px, 30px) scale(1)';
+        i5.style.transform = 'translate(-30px, -30px) scale(1)';
         if (signature) {
             signature.classList.remove('opacity-0');
             signature.classList.add('opacity-100');
@@ -86,30 +85,26 @@ async function playOpeningSequence() {
         
         // 4.1 Relatórios (H) brota do centro e se desloca, empurrando D (Ways) e C (Visão Geral)
         i4.style.opacity = '1';
-        i4.style.transform = 'translate(-35px, -10px) scale(1)';
-        i5.style.transform = 'translate(-70px, -20px) scale(1)'; // D se desloca
-        i3.style.transform = 'translate(30px, -50px) scale(1)';  // C se desloca
+        i4.style.transform = 'translate(-30px, -30px) scale(1)';
+        i5.style.transform = 'translate(-90px, -30px) scale(1)'; // D se desloca (Col 1, Row 2)
+        i3.style.transform = 'translate(30px, -90px) scale(1)';  // C se desloca (Col 3, Row 1)
         await sleep(150);
 
-        // 4.2 Admin (G) brota do centro e se desloca, empurrando A (Aparelhos) e H (Relatórios)
+        // 4.2 Admin (G) brota do centro e se desloca, empurrando A (Aparelhos)
         i8.style.opacity = '1';
-        i8.style.transform = 'translate(35px, -10px) scale(1)';
-        i1.style.transform = 'translate(70px, 40px) scale(1)';  // A se desloca
-        i3.style.transform = 'translate(35px, -70px) scale(1)'; // C chega na coordenada final!
+        i8.style.transform = 'translate(30px, -30px) scale(1)';
+        i1.style.transform = 'translate(90px, 30px) scale(1)';  // A se desloca (Col 4, Row 3)
         await sleep(150);
 
-        // 4.3 Reembolsos (E) brota do centro e se desloca, empurrando B (Lavagem) e D (Ways)
+        // 4.3 Reembolsos (E) brota do centro e se desloca, empurrando B (Lavagem)
         i6.style.opacity = '1';
-        i6.style.transform = 'translate(-35px, 50px) scale(1)';
-        i2.style.transform = 'translate(-35px, 70px) scale(1)';  // B se desloca
-        i5.style.transform = 'translate(-105px, -10px) scale(1)'; // D chega na coordenada final!
+        i6.style.transform = 'translate(-30px, 30px) scale(1)';
+        i2.style.transform = 'translate(-30px, 90px) scale(1)';  // B se desloca (Col 2, Row 4)
         await sleep(150);
 
-        // 4.4 Mini Games (F) brota do centro e se desloca, empurrando A (Aparelhos) e B (Lavagem) para as posições finais
+        // 4.4 Mini Games (F) brota do centro para preencher a grade simétrica 3x3 expandida
         i7.style.opacity = '1';
-        i7.style.transform = 'translate(35px, 50px) scale(1)';
-        i1.style.transform = 'translate(105px, 50px) scale(1)';  // A chega na coordenada final!
-        i2.style.transform = 'translate(-35px, 110px) scale(1)'; // B chega na coordenada final!
+        i7.style.transform = 'translate(30px, 30px) scale(1)';
         await sleep(600);
 
         // --- CENA DE REPOSIÇÃO: OFFLINE (O BIG BANG DIGITAL) ---
@@ -183,6 +178,7 @@ async function playOpeningSequence() {
             if (monoM) monoM.style.color = '#020f3d';
             
             // As letras "ESA" deslizam horizontalmente para a direita revelando a palavra "iMESA"
+            monoESA.style.color = '#020f3d';
             monoESA.classList.remove('opacity-0', 'max-w-0');
             monoESA.classList.add('opacity-100', 'max-w-[150px]');
         }
@@ -193,12 +189,12 @@ async function playOpeningSequence() {
         if (welcomeSesc) {
             welcomeSesc.classList.remove('opacity-0');
             welcomeSesc.classList.add('opacity-100');
-            welcomeSesc.style.transform = 'translateY(-40px)';
+            welcomeSesc.style.transform = 'translateY(-48px)';
         }
         if (welcomeBrasil) {
             welcomeBrasil.classList.remove('opacity-0');
             welcomeBrasil.classList.add('opacity-100');
-            welcomeBrasil.style.transform = 'translateY(40px)';
+            welcomeBrasil.style.transform = 'translateY(48px)';
         }
         await sleep(400);
 
@@ -221,7 +217,7 @@ async function playOpeningSequence() {
         
         await sleep(300);
 
-        // IMPLOSÃO: Puxa as marcas d'água, as auras coloridas e o logo para dentro do "iMESA" (Vórtice)
+        // IMPLOSÃO: Puxa as marcas d'água, as auras coloridas e o logo em direção ao centro de gravidade (Vórtice)
         if (glowContainer) {
             glowContainer.style.transform = 'scale(0) rotate(360deg)';
             glowContainer.style.opacity = '0';
@@ -237,7 +233,7 @@ async function playOpeningSequence() {
         
         await sleep(400); // Tempo do fechamento do vórtice de energia
 
-        // A CORTINA IMPlODE: O próprio fundo branco do loader sofre uma implosão para o centro antes de sumir!
+        // A CORTINA IMPLODE: O próprio fundo branco do loader sofre uma implosão para o centro antes de sumir!
         loader.style.transition = 'transform 0.6s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease-in-out, scale 0.6s cubic-bezier(0.85, 0, 0.15, 1)';
         loader.style.transform = 'scale(0)';
         loader.style.opacity = '0';
