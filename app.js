@@ -1,8 +1,12 @@
-// ==========================================
-// 1. ESTADO GLOBAL E SINCRO DE CARREGAMENTO
-// ==========================================
+/**
+ * ==========================================
+ * MOTOR LÓGICO PRINCIPAL DO PWA (CORE)
+ * VERSÃO PREMIUM ULTRA-OTIMIZADA (SINAL VERDE)
+ * ==========================================
+ */
+
 let iframeLoaded = false;
-let deferredPrompt;
+let deferredPrompt = null;
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Monitora se o iframe do iMesa terminou de carregar nos servidores do Google
@@ -17,21 +21,25 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// 2. COREOGRAFIA DE ABERTURA (PENTÁGONO ORBITAL)
+// COREOGRAFIA DE ABERTURA EM 10 ATOS
 // ==========================================
 async function playOpeningSequence() {
-    console.log("1. Maestro posicionado. Preparando o Pentágono...");
+    console.log("[PWA] Iniciando a coreografia do Pentágono...");
     
     try {
         lucide.createIcons();
-        console.log("2. Ícones renderizados com sucesso.");
 
-        const i1 = document.getElementById('icon-1');
-        const i2 = document.getElementById('icon-2');
-        const i3 = document.getElementById('icon-3');
-        const i4 = document.getElementById('icon-4');
-        const i5 = document.getElementById('icon-5'); // Módulo Ways (Fúcsia)
-        const check = document.getElementById('icon-check');
+        // Mapeamento dos Atores do Sistema
+        const i1 = document.getElementById('icon-1'); // Aparelhos (A)
+        const i2 = document.getElementById('icon-2'); // Lavagem (B)
+        const i3 = document.getElementById('icon-3'); // Visão Geral (C)
+        const i4 = document.getElementById('icon-4'); // Relatórios (H)
+        const i5 = document.getElementById('icon-5'); // Ways (D)
+        const i6 = document.getElementById('icon-6'); // Reembolsos (E)
+        const i7 = document.getElementById('icon-7'); // Mini Games (F)
+        const i8 = document.getElementById('icon-8'); // Admin (G)
+        
+        const check = document.getElementById('icon-check'); // Monograma Card (X)
         const welcome = document.getElementById('welcome-text');
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
@@ -39,102 +47,142 @@ async function playOpeningSequence() {
         const glowContainer = document.getElementById('glow-container');
 
         if (!i1 || !i5 || !check) {
-            console.log("ERRO: Elementos do Pentágono não encontrados. Revelando sistema.");
+            console.log("ERRO: Atores do Pentágono não encontrados. Revelando sistema.");
             if (loader) loader.style.display = 'none';
             return;
         }
 
-        // Definição física das coordenadas de órbita circular (Pentágono de raio 55px)
-        const pos1 = 'translate(0px, -55px)';    // Topo (0º)
-        const pos2 = 'translate(52px, -17px)';   // Direita Superior (72º)
-        const pos3 = 'translate(32px, 45px)';    // Direita Inferior (144º)
-        const pos4 = 'translate(-32px, 45px)';   // Esquerda Inferior (216º)
-        const pos5 = 'translate(-52px, -17px)';  // Esquerda Superior (288º)
-
-        console.log("3. Iniciando a dança orbital!");
+        // --- ATO 1: Ways (D) surge no centro ---
+        i5.style.opacity = '1';
+        i5.style.transform = 'translate(0px, 0px) scale(1)';
         await sleep(500);
 
-        // Movimento 2: Giro 1 (Avança 1 casa no sentido horário)
-        i1.style.transform = pos2;
-        i2.style.transform = pos3;
-        i5.style.transform = pos4;
-        i3.style.transform = pos5;
-        i4.style.transform = pos1;
+        // --- ATO 2: Aparelhos (A) brota e empurra. Signature (Mesaque) surge. ---
+        i1.style.opacity = '1';
+        i1.style.transform = 'translate(40px, 0px) scale(1)';
+        i5.style.transform = 'translate(-40px, 0px) scale(1)';
+        if (signature) {
+            signature.classList.remove('opacity-0');
+            signature.classList.add('opacity-100');
+        }
         await sleep(600);
 
-        // Movimento 3: Giro 2 (Avança mais 1 casa no sentido horário)
-        i1.style.transform = pos3;
-        i2.style.transform = pos4;
-        i5.style.transform = pos5;
-        i3.style.transform = pos1;
-        i4.style.transform = pos2;
+        // --- ATO 3: Lavagem (B) e Visão Geral (C) nascem formando a grade 2x2 ---
+        i2.style.opacity = '1';
+        i2.style.transform = 'translate(-40px, 30px) scale(1)';
+        i3.style.opacity = '1';
+        i3.style.transform = 'translate(40px, -30px) scale(1)';
         
-        signature.classList.remove('opacity-0');
-        signature.classList.add('opacity-100');
+        // Move D e A para fechar o quadrado 2x2
+        i5.style.transform = 'translate(-40px, -30px) scale(1)';
+        i1.style.transform = 'translate(40px, 30px) scale(1)';
         await sleep(600);
 
-        // Movimento 4: Giro 3 (Avança mais 1 casa)
-        i1.style.transform = pos4;
-        i2.style.transform = pos5;
-        i5.style.transform = pos1;
-        i3.style.transform = pos2;
-        i4.style.transform = pos3;
+        // --- ATO 4: Cascata Elástica Rápida ("Pop-Pop-Pop-Pop") ---
+        // Nascem H, G, E, F de forma encadeada de milissegundos, empurrando a grade
+        
+        // 4.1 Relatórios (H)
+        i4.style.opacity = '1';
+        i4.style.transform = 'translate(-35px, -10px) scale(1)';
+        await sleep(150);
+
+        // 4.2 Admin (G)
+        i8.style.opacity = '1';
+        i8.style.transform = 'translate(35px, -10px) scale(1)';
+        await sleep(150);
+
+        // 4.3 Reembolsos (E)
+        i6.style.opacity = '1';
+        i6.style.transform = 'translate(-35px, 50px) scale(1)';
+        await sleep(150);
+
+        // 4.4 Mini Games (F)
+        i7.style.opacity = '1';
+        i7.style.transform = 'translate(35px, 50px) scale(1)';
+        await sleep(150);
+
+        // Assenta os outros atores nas suas coordenadas finais expansivas de estilingue
+        i5.style.transform = 'translate(-105px, -10px) scale(1)'; // D
+        i1.style.transform = 'translate(105px, 50px) scale(1)';  // A
+        i3.style.transform = 'translate(35px, -70px) scale(1)';  // C
+        i2.style.transform = 'translate(-35px, 110px) scale(1)'; // B
         await sleep(600);
 
-        // ==========================================
-        // CENA ALTERNATIVA: OFFLINE (Repulsão Pentagonal)
-        // ==========================================
+        // --- CENA DE REPOSIÇÃO: OFFLINE (O BIG BANG DIGITAL) ---
         if (!navigator.onLine) {
-            console.log("Status: Sem internet. Repulsão circular.");
+            console.log("[PWA] Sem internet. Ativando o Big Bang Offline...");
             
-            [i1, i2, i3, i4, i5].forEach(icon => icon.classList.add('freeze'));
+            [i1, i2, i3, i4, i5, i6, i7, i8].forEach(icon => {
+                icon.classList.add('freeze');
+            });
             
-            // Explode os 5 ícones para fora do centro em seus respectivos ângulos com precisão geométrica
-            i1.style.transform = 'translate(0px, -160px) rotate(0deg) scale(0.7)';
-            i2.style.transform = 'translate(152px, -50px) rotate(72deg) scale(0.7)';
-            i5.style.transform = 'translate(94px, 130px) rotate(144deg) scale(0.7)';
-            i3.style.transform = 'translate(-94px, 130px) rotate(216deg) scale(0.7)';
-            i4.style.transform = 'translate(-152px, -50px) rotate(288deg) scale(0.7)';
+            // Arremessa os 8 ícones cinzas desordenados para as bordas externas da tela (Shatter)
+            i5.style.transform = 'translate(-250px, -100px) rotate(-180deg) scale(0.4)';  // D
+            i4.style.transform = 'translate(-120px, -250px) rotate(-90deg) scale(0.4)';   // H
+            i8.style.transform = 'translate(120px, -250px) rotate(90deg) scale(0.4)';     // G
+            i1.style.transform = 'translate(250px, 100px) rotate(180deg) scale(0.4)';     // A
+            i3.style.transform = 'translate(250px, -180px) rotate(135deg) scale(0.4)';    // C
+            i2.style.transform = 'translate(-120px, 250px) rotate(-135deg) scale(0.4)';   // B
+            i6.style.transform = 'translate(-250px, 180px) rotate(-225deg) scale(0.4)';   // E
+            i7.style.transform = 'translate(120px, 250px) rotate(225deg) scale(0.4)';     // F
 
             offlineAlert.classList.remove('hidden');
             await sleep(100);
             offlineAlert.classList.remove('opacity-0', 'scale-95');
             offlineAlert.classList.add('opacity-100', 'scale-100');
-            return; 
+            return;
         }
 
-        // ==========================================
-        // CENA PRINCIPAL: A FUSÃO E REVELAÇÃO REATIVA
-        // ==========================================
-        // 1. Os 5 blocos coloridos mergulham e encolhem no centro de gravidade
-        [i1, i2, i3, i4, i5].forEach(icon => {
+        // --- ATO 5 & 6: Colisão Gravitacional e Fusão Elástica Instantânea ---
+        // Todos colapsam ao mesmo tempo. No meio do colapso (300ms), o monograma X explode de dentro!
+        [i1, i2, i3, i4, i5, i6, i7, i8].forEach(icon => {
             icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0.2)';
             icon.style.opacity = '0';
         });
+        await sleep(300); // Momento exato do impacto (Ato 6)
 
-        // 2. Revela a Aura Galáctica Dançante na periferia (65px) de forma muito suave e gradual
-        if (glowContainer) {
-            glowContainer.classList.remove('hidden');
-            await sleep(50); // Delay sutil para permitir a renderização da div antes de transicionar a opacidade
-            glowContainer.classList.remove('opacity-0');
-            glowContainer.classList.add('opacity-100');
-        }
-
-        // 3. O SVG de fusão surge engolindo a todos instantaneamente
         check.style.opacity = '1';
         check.style.transform = 'scale(1.15)';
-        
-        await sleep(350); 
-        check.style.transform = 'scale(1)'; // Acomodação visual (Settle)
+        await sleep(300);
+        check.style.transform = 'scale(1)'; // Acomodação de estilingue (Settle)
 
+        // --- ATO 7: A Dança das Auras (8 sombras curtas nítidas se movendo) ---
+        if (glowContainer) {
+            glowContainer.classList.remove('hidden');
+            await sleep(50);
+            glowContainer.classList.remove('opacity-0');
+            glowContainer.classList.add('opacity-100');
+
+            // Envia as 8 bolinhas de luz de desfoque curto para as suas órbitas individuais (75px)
+            document.getElementById('glow-1').style.transform = 'translate(0px, -75px)';
+            document.getElementById('glow-2').style.transform = 'translate(71px, -23px)';
+            document.getElementById('glow-3').style.transform = 'translate(44px, 61px)';
+            document.getElementById('glow-5').style.transform = 'translate(-44px, 61px)';
+            document.getElementById('glow-6').style.transform = 'translate(-71px, -23px)';
+            document.getElementById('glow-7').style.transform = 'translate(-71px, 23px)';
+            document.getElementById('glow-8').style.transform = 'translate(71px, 23px)';
+            document.getElementById('glow-4').style.transform = 'translate(0px, 75px)';
+        }
+        await sleep(400);
+
+        // --- ATO 8: Morte do Card e Revelação do "iMESA" ---
+        const monoCard = document.getElementById('monogram-card');
+        if (monoCard) {
+            monoCard.style.backgroundColor = 'transparent';
+            monoCard.style.boxShadow = 'none';
+            
+            const monoI = document.getElementById('monogram-i');
+            const monoM = document.getElementById('monogram-M');
+            if (monoI) monoI.style.color = '#020f3d';
+            if (monoM) monoM.style.color = '#020f3d';
+        }
         await sleep(200);
 
-        // Revela o título "Check!"
+        // --- ATO 9: O Sesc Mesa Brasil Watermark ---
         welcome.classList.remove('opacity-0', 'translate-y-4');
         welcome.classList.add('opacity-100', 'translate-y-0');
-        
-        // 4. Sincronização Inteligente de Carregamento (Evita a tela branca do iframe)
-        // Aguarda até o iframe do Google estar realmente pronto ou dá timeout após 15 segundos
+
+        // --- Loop de Sincronia de Carregamento ---
         let timeoutCounter = 0;
         while (!iframeLoaded && timeoutCounter < 30) {
             console.log("[PWA] Aguardando o carregamento interno do iMesa...");
@@ -142,14 +190,40 @@ async function playOpeningSequence() {
             timeoutCounter++;
         }
 
-        console.log("5. iMesa pronto. Removendo Splash Screen.");
-        await sleep(1000); // Garante a permanência estável da aura por tempo confortável
-        loader.classList.add('opacity-0');
+        // --- ATO 10: Vórtice de Implosão, Glitch e Revelação do GAS ---
+        console.log("[PWA] iMesa pronto. Iniciando implosão e transição...");
+        
+        // O Glitch toma conta do título principal "iMESA"
+        const brandTitle = document.getElementById('brand-title');
+        if (brandTitle) {
+            brandTitle.classList.add('animate-imesa-glitch');
+        }
+        
+        await sleep(200);
+
+        // Implode as auras, marcas d'água e o logo em direção ao centro de gravidade (Vórtice)
+        if (glowContainer) {
+            glowContainer.style.transform = 'scale(0) rotate(360deg)';
+            glowContainer.style.opacity = '0';
+        }
+        
+        const welcomeSpans = welcome.querySelectorAll('span');
+        welcomeSpans.forEach(span => {
+            span.style.transform = 'scale(0) translate(0px, 0px)';
+            span.style.opacity = '0';
+            span.style.transition = 'all 0.4s ease-in-out';
+        });
+        
+        await sleep(400); // Tempo do fechamento da implosão
+
+        // Sobe a cortina digital de forma veloz para revelar o GAS carregado por baixo!
+        loader.style.transition = 'transform 0.6s cubic-bezier(0.85, 0, 0.15, 1)';
+        loader.style.transform = 'translateY(-100%)';
         
         setTimeout(() => {
             loader.style.pointerEvents = 'none';
             loader.classList.add('hidden');
-        }, 1000);
+        }, 600);
 
     } catch (error) {
         console.error("Erro na coreografia: ", error);
@@ -159,7 +233,7 @@ async function playOpeningSequence() {
 }
 
 // ==========================================
-// 3. REGISTRO DO SW
+// REGISTRO DO SERVICE WORKER E INSTALADORES
 // ==========================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
@@ -169,9 +243,6 @@ function registerServiceWorker() {
     }
 }
 
-// ==========================================
-// 4. INSTALAÇÃO PWA
-// ==========================================
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -198,9 +269,6 @@ window.installPWA = async () => {
     }
 };
 
-// ==========================================
-// 5. DETECÇÃO E DIRETRIZES IOS
-// ==========================================
 function checkIOS() {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
@@ -220,27 +288,22 @@ function checkIOS() {
 }
 
 // ==========================================
-// 6. PONTE DE COMUNICAÇÃO (POSTMESSAGE) & HISTÓRICO
+// HISTÓRICO E REDIRECIONADOR DE VOLTAR (PROXY)
 // ==========================================
-// Registra estados do histórico para o PWA pai controlar o botão voltar físico do dispositivo
 window.addEventListener('DOMContentLoaded', () => {
     window.history.replaceState({ state: 'pwa_base' }, '');
     window.history.pushState({ state: 'pwa_active' }, '');
 });
 
 window.addEventListener('popstate', (event) => {
-    // Ao clicar no "voltar" nativo do celular, envia a mensagem para o iframe do iMesa recuar internamente
     const iframe = document.getElementById('gas-frame');
     if (iframe && iframe.contentWindow) {
         console.log("[PWA] Redirecionando ação 'Voltar' para o iMesa...");
         iframe.contentWindow.postMessage({ action: 'back' }, '*');
     }
-    
-    // Mantém a pilha do histórico travada no PWA pai para não fechar o app de vez
     window.history.pushState({ state: 'pwa_active' }, '');
 });
 
-// Escuta mensagens vindas do iMesa (ex: quando o motorista clica em voltar na Home do iMesa)
 window.addEventListener('message', (event) => {
     if (event.data && event.data.action === 'exit_app') {
         console.log("[PWA] iMesa solicitou fechamento. Encerrando aplicação.");
@@ -248,9 +311,7 @@ window.addEventListener('message', (event) => {
     }
 });
 
-// ==========================================
-// 7. GATILHO DE BOOT
-// ==========================================
+// GATILHO DE BOOT PRINCIPAL
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         playOpeningSequence();
