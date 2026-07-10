@@ -23,9 +23,6 @@ async function playOpeningSequence() {
             document.getElementById('icon-G'), document.getElementById('icon-H')
         ];
         
-        const monolithBrand = document.getElementById('monolith-brand');
-        const imesaText = document.getElementById('mono-imesa-text');
-        const glowContainer = document.getElementById('glow-container');
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
@@ -76,56 +73,32 @@ async function playOpeningSequence() {
             return;
         }
 
-        // --- ATO 5: SUGADOS PARA O CENTRO (Correção de Física) ---
+        // ATO 5: SUGADOS PARA O CENTRO
         icons.forEach(icon => {
-            // Removemos o elástico do CSS
             icon.classList.remove('actor');
-            // Impomos a física de puxão direto para zero
             icon.style.transition = 'transform 0.4s ease-in, opacity 0.3s ease-in 0.1s';
             icon.style.transform = 'translate(0px, 0px) scale(0)';
             icon.style.opacity = '0';
         });
         
+        if (signature) signature.style.transition = 'opacity 0.2s';
+        if (signature) signature.style.opacity = '0';
+        
         await sleep(400); // Pausa cravada para a viagem até o centro
 
+        // Verifica se o GAS carregou
         let timeoutCounter = 0;
         while (!iframeLoaded && timeoutCounter < 30) {
             await sleep(500);
             timeoutCounter++;
         }
 
-        // ATO 6: Mostrar "SESC iMESA BRASIL" (O Bloco Perfeito)
-        if (glowContainer) {
-            glowContainer.classList.remove('hidden');
-            await sleep(50);
-            glowContainer.style.opacity = '1';
-            glowContainer.style.transform = 'scale(1)';
-        }
-
-        if (monolithBrand) {
-            monolithBrand.style.opacity = '1';
-            monolithBrand.style.transform = 'scale(1)';
-        }
-        await sleep(1200); 
-
-        // ATO 7: Puxar TUDO para o centro revelando o GAS
-        if (imesaText) imesaText.classList.add('animate-imesa-overload');
-        await sleep(300);
-
-        monolithBrand.style.transform = 'scale(0)';
-        monolithBrand.style.opacity = '0';
-        
-        glowContainer.style.transform = 'scale(0) rotate(360deg)';
-        glowContainer.style.opacity = '0';
-        
-        if (signature) signature.style.opacity = '0';
-
-        // O Fundo branco imploda, mostrando o GAS!
-        loader.style.transition = 'transform 0.5s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.5s ease-in-out';
+        // ATO 6: IMPLOSÃO DO FUNDO E REVELAÇÃO DO GAS
+        loader.style.transition = 'transform 0.4s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.4s ease-in-out';
         loader.style.transform = 'scale(0)';
         loader.style.opacity = '0';
         
-        await sleep(500);
+        await sleep(400);
         loader.style.pointerEvents = 'none';
         loader.classList.add('hidden');
 
