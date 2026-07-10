@@ -1,10 +1,3 @@
-/**
- * ==========================================
- * MOTOR LÓGICO PRINCIPAL
- * COREOGRAFIA DIRETA: DANÇA -> MARCA -> SUGADO PRO GAS
- * ==========================================
- */
-
 let iframeLoaded = false;
 let deferredPrompt = null;
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -43,8 +36,7 @@ async function playOpeningSequence() {
         await sleep(400);
 
         // ATO 2: A e D
-        icons[0].style.opacity = '1';
-        icons[0].style.transform = 'translate(30px, 0px) scale(1)';
+        icons[0].style.opacity = '1'; icons[0].style.transform = 'translate(30px, 0px) scale(1)';
         icons[3].style.transform = 'translate(-30px, 0px) scale(1)';
         if (signature) { signature.classList.remove('opacity-0'); signature.classList.add('opacity-100'); }
         await sleep(400);
@@ -84,27 +76,25 @@ async function playOpeningSequence() {
             return;
         }
 
-        // --- ATO 5: Sugados violentamente para o centro ---
+        // --- ATO 5: SUGADOS PARA O CENTRO (Correção de Física) ---
         icons.forEach(icon => {
-            // Anula o elástico do CSS e impõe uma aceleração contínua (ease-in)
-            // A opacidade só começa a cair depois de 0.15s, garantindo que o movimento seja visto
-            icon.style.transition = 'transform 0.4s ease-in, opacity 0.2s ease-in 0.15s';
-            icon.style.transform = 'translate(0px, 0px) rotate(180deg) scale(0)';
+            // Removemos o elástico do CSS
+            icon.classList.remove('actor');
+            // Impomos a física de puxão direto para zero
+            icon.style.transition = 'transform 0.4s ease-in, opacity 0.3s ease-in 0.1s';
+            icon.style.transform = 'translate(0px, 0px) scale(0)';
             icon.style.opacity = '0';
         });
         
-        // Pausa cravada para a animação do puxão terminar antes de qualquer outra coisa
-        await sleep(400); 
-        
-        // A verificação do GAS foi movida para depois do puxão, para não engasgar a física
+        await sleep(400); // Pausa cravada para a viagem até o centro
+
         let timeoutCounter = 0;
         while (!iframeLoaded && timeoutCounter < 30) {
             await sleep(500);
             timeoutCounter++;
         }
-        await sleep(100);
 
-        // ATO 6: Mostrar "SESC iMESA BRASIL" e as auras
+        // ATO 6: Mostrar "SESC iMESA BRASIL" (O Bloco Perfeito)
         if (glowContainer) {
             glowContainer.classList.remove('hidden');
             await sleep(50);
