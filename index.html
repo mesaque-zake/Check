@@ -65,7 +65,7 @@
     </div>
 
     <!-- Tela do Carregador (Loader / Splash Screen) -->
-    <div id="loader-screen" class="absolute inset-0 bg-slate-50 z-50 flex flex-col items-center justify-center transition-opacity duration-1000">
+    <div id="loader-screen" class="absolute inset-0 bg-slate-50 z-50 flex flex-col items-center justify-center transition-all duration-1000">
         
         <!-- Wrapper Centralizador -->
         <div class="relative flex flex-col items-center justify-center z-20">
@@ -73,7 +73,7 @@
             <!-- Contêiner de Ícones (Pentágono e Fusoes) -->
             <div class="relative w-48 h-48 flex items-center justify-center transform transition-transform duration-700 md:scale-125">
                 
-                <!-- ÍCONES OPERACIONAIS (Iniciam camuflados no ponto zero para a cascata do Ato 1 e 4) -->
+                <!-- ÍCONES OPERACIONAIS (Iniciam camuflados no ponto zero para a cascata elástica) -->
                 
                 <!-- Icone A: Aparelhos (Azul) -->
                 <div id="icon-1" class="actor absolute w-14 h-14 bg-blue-600 rounded-2xl shadow-lg shadow-blue-600/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
@@ -88,6 +88,11 @@
                 <!-- Icone C: Visão Geral (Amarelo Amber) -->
                 <div id="icon-3" class="actor absolute w-14 h-14 bg-amber-500 rounded-2xl shadow-lg shadow-amber-500/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
                     <i data-lucide="bar-chart-3" class="text-white w-7 h-7"></i>
+                </div>
+
+                <!-- Icone H: Relatórios (Vermelho) -->
+                <div id="icon-4" class="actor absolute w-14 h-14 bg-red-600 rounded-2xl shadow-lg shadow-red-600/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
+                    <i data-lucide="file-text" class="text-white w-7 h-7"></i>
                 </div>
 
                 <!-- Icone D: Ways (Fúcsia) - "W" em Dancing Script -->
@@ -110,46 +115,40 @@
                     <i data-lucide="settings" class="text-white w-7 h-7"></i>
                 </div>
 
-                <!-- Icone H: Relatórios (Vermelho) -->
-                <div id="icon-4" class="actor absolute w-14 h-14 bg-red-600 rounded-2xl shadow-lg shadow-red-600/30 flex items-center justify-center z-20 opacity-0 scale-0" style="transform: translate(0px, 0px);">
-                    <i data-lucide="file-text" class="text-white w-7 h-7"></i>
+                <!-- AS 8 AURAS CÓSMICAS (Sombras de desfoque curto para serem nítidas e separadas) -->
+                <div id="glow-container" class="absolute w-72 h-72 flex items-center justify-center pointer-events-none transition-all duration-[2000ms] hidden opacity-0 z-10 animate-spin-slow">
+                    <div id="glow-1" class="absolute w-12 h-12 rounded-full bg-blue-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-2" class="absolute w-12 h-12 rounded-full bg-emerald-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-3" class="absolute w-12 h-12 rounded-full bg-amber-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-5" class="absolute w-12 h-12 rounded-full bg-fuchsia-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-6" class="absolute w-12 h-12 rounded-full bg-orange-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-7" class="absolute w-12 h-12 rounded-full bg-rose-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-8" class="absolute w-12 h-12 rounded-full bg-slate-500/35 blur-xl transition-transform duration-1000"></div>
+                    <div id="glow-4" class="absolute w-12 h-12 rounded-full bg-red-500/35 blur-xl transition-transform duration-1000"></div>
                 </div>
 
-                <!-- AS 8 AURAS CÓSMICAS (Sombras curtas e bem definidas em rotação lenta) -->
-                <div id="glow-container" class="absolute w-72 h-72 flex items-center justify-center pointer-events-none transition-opacity duration-[2000ms] hidden opacity-0 z-10 animate-spin-slow">
-                    <!-- Sombra A (Aparelhos) - Azul -->
-                    <div id="glow-1" class="absolute w-14 h-14 rounded-full bg-blue-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra B (Lavagem) - Verde -->
-                    <div id="glow-2" class="absolute w-14 h-14 rounded-full bg-emerald-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra C (Visão Geral) - Amarela -->
-                    <div id="glow-3" class="absolute w-14 h-14 rounded-full bg-amber-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra D (Ways) - Fúcsia -->
-                    <div id="glow-5" class="absolute w-14 h-14 rounded-full bg-fuchsia-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra E (Reembolsos) - Laranja -->
-                    <div id="glow-6" class="absolute w-14 h-14 rounded-full bg-orange-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra F (Mini Games) - Rosa -->
-                    <div id="glow-7" class="absolute w-14 h-14 rounded-full bg-rose-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra G (Admin) - Cinza -->
-                    <div id="glow-8" class="absolute w-14 h-14 rounded-full bg-slate-500/35 blur-xl transition-transform duration-1000"></div>
-                    <!-- Sombra H (Relatórios) - Vermelha -->
-                    <div id="glow-4" class="absolute w-14 h-14 rounded-full bg-red-500/35 blur-xl transition-transform duration-1000"></div>
-                </div>
-
-                <!-- CARD DE FUSÃO "iM": Card Azul-Marinho carregando o novo monograma Montserrat -->
-                <div id="icon-check" class="actor absolute w-36 h-36 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
-                    <div id="monogram-card" class="w-16 h-16 bg-[#020f3d] rounded-2xl shadow-xl flex items-center justify-center font-montserrat text-lg text-white select-none transition-all duration-700">
-                        <span id="monogram-i" class="font-normal animate-i-glitch inline-block">i</span>
-                        <span id="monogram-M" class="font-extrabold ml-[0.5px]">M</span>
+                <!-- CARD DE FUSÃO "iM" MORPHING (Carrega "ESA" oculto para se expandir no Ato 8) -->
+                <div id="icon-check" class="actor absolute w-48 h-16 flex items-center justify-center z-30" style="transform: scale(0); opacity: 0;">
+                    <div id="monogram-card" class="h-16 px-4 bg-[#020f3d] rounded-2xl shadow-xl flex items-center justify-center font-montserrat text-lg text-white select-none transition-all duration-700 overflow-hidden whitespace-nowrap">
+                        <span id="monogram-i" class="font-normal animate-i-glitch inline-block transition-colors duration-700">i</span>
+                        <span id="monogram-M" class="font-extrabold ml-[0.5px] transition-colors duration-700">M</span>
+                        <span id="monogram-ESA" class="font-extrabold opacity-0 max-w-0 inline-block overflow-hidden transition-all duration-500" style="transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);">ESA</span>
                     </div>
+                </div>
+
+                <!-- WATERMARKS SESC E BRASIL (Alinhadas de forma absoluta em relação ao centro) -->
+                <div id="welcome-sesc" class="absolute text-center opacity-0 transform translate-y-2 transition-all duration-700 font-montserrat select-none z-30 pointer-events-none" style="transform: translateY(-50px);">
+                    <span class="block text-slate-300 font-normal text-xs leading-none tracking-widest uppercase">Sesc</span>
+                </div>
+                <div id="welcome-brasil" class="absolute text-center opacity-0 transform -translate-y-2 transition-all duration-700 font-montserrat select-none z-30 pointer-events-none" style="transform: translateY(50px);">
+                    <span class="block text-slate-300 font-normal text-[10px] tracking-widest uppercase">Brasil</span>
                 </div>
 
             </div>
 
-            <!-- BLOCO DE TEXTOS (SESC IMESA BRASIL) -->
-            <div id="welcome-text" class="text-center mt-6 space-y-1.5 opacity-0 transform translate-y-4 transition-all duration-700 font-montserrat select-none">
-              <span class="block text-slate-300 font-normal text-xs leading-none tracking-widest uppercase">Sesc</span>
-              <h1 id="brand-title" class="text-3xl font-black text-slate-800 tracking-tight leading-none">iMesa</h1>
-              <span class="block text-slate-300 font-normal text-[10px] tracking-widest uppercase mt-1">Brasil</span>
+            <!-- TÍTULO MESTRE "iMESA" (Com animação de Glitch no Ato 10) -->
+            <div id="welcome-text" class="text-center mt-6 select-none font-montserrat relative z-20">
+              <h1 id="brand-title" class="text-3xl font-black text-slate-800 tracking-tight leading-none opacity-0 transform translate-y-4 transition-all duration-700">iMesa</h1>
             </div>
             
         </div>
