@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="assets/Favicon.png">
     <link rel="apple-touch-icon" href="assets/Icon180.png">
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Montserrat:wght@400;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -88,22 +88,27 @@
                 <i data-lucide="settings" class="text-white w-6 h-6"></i>
             </div>
 
-            <div id="glow-container" class="absolute w-[400px] h-[400px] flex items-center justify-center pointer-events-none opacity-0 scale-50 z-10 transition-all duration-[600ms]">
-                <div class="absolute w-32 h-32 rounded-full bg-blue-500/20 blur-2xl transform translate-x-[-30px] translate-y-[-30px]"></div>
-                <div class="absolute w-32 h-32 rounded-full bg-fuchsia-500/20 blur-2xl transform translate-x-[30px] translate-y-[30px]"></div>
-                <div class="absolute w-32 h-32 rounded-full bg-emerald-500/20 blur-2xl transform translate-x-[-30px] translate-y-[30px]"></div>
-                <div class="absolute w-32 h-32 rounded-full bg-amber-500/20 blur-2xl transform translate-x-[30px] translate-y-[-30px]"></div>
+            <div id="glow-container" class="absolute w-[200px] h-[200px] flex items-center justify-center pointer-events-none opacity-0 scale-50 z-10 transition-all duration-[600ms]">
+                <div class="absolute w-28 h-28 rounded-full bg-blue-500/40 blur-xl transform translate-x-[-15px] translate-y-[-15px]"></div>
+                <div class="absolute w-28 h-28 rounded-full bg-fuchsia-500/40 blur-xl transform translate-x-[15px] translate-y-[15px]"></div>
+                <div class="absolute w-28 h-28 rounded-full bg-emerald-500/40 blur-xl transform translate-x-[-15px] translate-y-[15px]"></div>
+                <div class="absolute w-28 h-28 rounded-full bg-amber-500/40 blur-xl transform translate-x-[15px] translate-y-[-15px]"></div>
             </div>
 
-            <div id="monolith-brand" class="absolute flex flex-col items-center justify-center opacity-0 scale-90 z-30 pointer-events-none w-full transition-all duration-[500ms]">
-                <span id="mono-sesc" class="font-montserrat font-extrabold text-[#020f3d]/15 text-6xl md:text-7xl tracking-widest uppercase select-none pb-2">Sesc</span>
+            <div id="monolith-brand" class="absolute flex flex-col items-center justify-center opacity-0 scale-90 z-30 pointer-events-none w-[260px] md:w-[320px] transition-all duration-[500ms]">
                 
-                <div id="mono-imesa-text" class="font-montserrat text-[#020f3d] text-5xl md:text-6xl flex items-baseline justify-center tracking-tight">
-                    <span id="mono-i" class="font-normal animate-i-glitch">i</span>
-                    <span id="mono-mesa" class="font-extrabold">MESA</span>
+                <div class="w-full flex justify-between font-montserrat font-black text-[#020f3d]/25 text-5xl md:text-6xl uppercase select-none leading-none mb-1">
+                    <span>S</span><span>E</span><span>S</span><span>C</span>
+                </div>
+                
+                <div id="mono-imesa-text" class="w-full flex items-baseline justify-center font-montserrat text-[#020f3d] text-6xl md:text-7xl tracking-tight leading-none static-glitch">
+                    <span id="mono-i" class="font-normal text-5xl md:text-6xl static-glitch-i">i</span>
+                    <span id="mono-mesa" class="font-black">MESA</span>
                 </div>
 
-                <span id="mono-brasil" class="font-montserrat font-extrabold text-[#020f3d]/15 text-5xl md:text-6xl tracking-[0.18em] uppercase select-none pt-2">Brasil</span>
+                <div class="w-full flex justify-between font-montserrat font-black text-[#020f3d]/25 text-4xl md:text-5xl uppercase select-none leading-none mt-1">
+                    <span>B</span><span>R</span><span>A</span><span>S</span><span>I</span><span>L</span>
+                </div>
             </div>
 
         </div>
