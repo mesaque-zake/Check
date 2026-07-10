@@ -1,7 +1,7 @@
 /**
  * ==========================================
- * MOTOR LÓGICO PRINCIPAL DO PWA (CORE)
- * A COREOGRAFIA DO PLANO B (VÓRTICE DO FUNDO)
+ * MOTOR LÓGICO PRINCIPAL (CORE V8)
+ * COREOGRAFIA "EFEITO ARPÃO" (IMPACTO & VÓRTICE)
  * ==========================================
  */
 
@@ -24,40 +24,46 @@ window.addEventListener('DOMContentLoaded', () => {
 // COREOGRAFIA DE ABERTURA E MUTAÇÃO
 // ==========================================
 async function playOpeningSequence() {
-    console.log("[PWA] Iniciando a dança do ecossistema...");
+    console.log("[PWA] Invocando a dança do ecossistema...");
     
     try {
         lucide.createIcons();
 
-        // Mapeamento: Atores da Dança (Grade 6x8)
-        const iA = document.getElementById('icon-A');
-        const iB = document.getElementById('icon-B');
-        const iC = document.getElementById('icon-C');
-        const iD = document.getElementById('icon-D');
-        const iE = document.getElementById('icon-E');
-        const iF = document.getElementById('icon-F');
-        const iG = document.getElementById('icon-G');
-        const iH = document.getElementById('icon-H');
+        // Mapeamento: Os 8 Atores (Grade Invisível)
+        const icons = [
+            document.getElementById('icon-A'),
+            document.getElementById('icon-B'),
+            document.getElementById('icon-C'),
+            document.getElementById('icon-D'),
+            document.getElementById('icon-E'),
+            document.getElementById('icon-F'),
+            document.getElementById('icon-G'),
+            document.getElementById('icon-H')
+        ];
         
-        // Mapeamento: O Grand Finale
+        // Mapeamento: O Clímax
         const monolithBrand = document.getElementById('monolith-brand');
-        const imesaText = document.getElementById('mono-imesa-text');
         const glowContainer = document.getElementById('glow-container');
-        const officialIcon = document.getElementById('official-icon-card');
+        const glows = [
+            document.getElementById('glow-1'),
+            document.getElementById('glow-2'),
+            document.getElementById('glow-3'),
+            document.getElementById('glow-4')
+        ];
         
         const signature = document.getElementById('signature');
         const loader = document.getElementById('loader-screen');
         const offlineAlert = document.getElementById('offline-alert');
 
         // --- ATO 1: O Surgimento de Ways (D) no Centro ---
-        iD.style.opacity = '1';
-        iD.style.transform = 'translate(0px, 0px) scale(1)';
+        icons[3].style.opacity = '1';
+        icons[3].style.transform = 'translate(0px, 0px) scale(1)';
         await sleep(400);
 
         // --- ATO 2: Aparelhos (A) brota e afasta-se de D ---
-        iA.style.opacity = '1';
-        iA.style.transform = 'translate(30px, 0px) scale(1)';
-        iD.style.transform = 'translate(-30px, 0px) scale(1)';
+        icons[0].style.opacity = '1';
+        icons[0].style.transform = 'translate(30px, 0px) scale(1)';
+        icons[3].style.transform = 'translate(-30px, 0px) scale(1)';
         
         if (signature) {
             signature.classList.remove('opacity-0');
@@ -66,90 +72,73 @@ async function playOpeningSequence() {
         await sleep(400);
 
         // --- ATO 3: Lavagem (B) e Visão (C) fecham o Quadrado 2x2 ---
-        iB.style.opacity = '1';
-        iB.style.transform = 'translate(-30px, 30px) scale(1)';
-        iC.style.opacity = '1';
-        iC.style.transform = 'translate(30px, -30px) scale(1)';
+        icons[1].style.opacity = '1';
+        icons[1].style.transform = 'translate(-30px, 30px) scale(1)';
+        icons[2].style.opacity = '1';
+        icons[2].style.transform = 'translate(30px, -30px) scale(1)';
         
-        iD.style.transform = 'translate(-30px, -30px) scale(1)';
-        iA.style.transform = 'translate(30px, 30px) scale(1)';
+        icons[3].style.transform = 'translate(-30px, -30px) scale(1)';
+        icons[0].style.transform = 'translate(30px, 30px) scale(1)';
         await sleep(500);
 
-        // --- ATO 4: A Cascata Elástica (Dispersão na Grade) ---
-        // Relatórios (H)
-        iH.style.opacity = '1';
-        iH.style.transform = 'translate(-30px, -30px) scale(1)';
-        iD.style.transform = 'translate(-90px, -30px) scale(1)';
+        // --- ATO 4: A Cascata Elástica Rápida (Grade 6x8) ---
+        // 4.1 Relatórios (H)
+        icons[7].style.opacity = '1';
+        icons[7].style.transform = 'translate(-30px, -30px) scale(1)';
+        icons[3].style.transform = 'translate(-90px, -30px) scale(1)';
         await sleep(150);
 
-        // Admin (G)
-        iG.style.opacity = '1';
-        iG.style.transform = 'translate(30px, -30px) scale(1)';
-        iC.style.transform = 'translate(30px, -90px) scale(1)';
+        // 4.2 Admin (G)
+        icons[6].style.opacity = '1';
+        icons[6].style.transform = 'translate(30px, -30px) scale(1)';
+        icons[2].style.transform = 'translate(30px, -90px) scale(1)';
         await sleep(150);
 
-        // Reembolsos (E)
-        iE.style.opacity = '1';
-        iE.style.transform = 'translate(-30px, 30px) scale(1)';
-        iB.style.transform = 'translate(-30px, 90px) scale(1)';
+        // 4.3 Reembolsos (E)
+        icons[4].style.opacity = '1';
+        icons[4].style.transform = 'translate(-30px, 30px) scale(1)';
+        icons[1].style.transform = 'translate(-30px, 90px) scale(1)';
         await sleep(150);
 
-        // Mini Games (F)
-        iF.style.opacity = '1';
-        iF.style.transform = 'translate(30px, 30px) scale(1)';
-        iA.style.transform = 'translate(90px, 30px) scale(1)';
-        await sleep(700);
+        // 4.4 Mini Games (F)
+        icons[5].style.opacity = '1';
+        icons[5].style.transform = 'translate(30px, 30px) scale(1)';
+        icons[0].style.transform = 'translate(90px, 30px) scale(1)';
+        await sleep(700); // Tempo para apreciar a grade pronta
 
         // ==========================================
         // GATILHO OFFLINE: SHATTER
         // ==========================================
         if (!navigator.onLine) {
-            console.log("[PWA] Queda de rede. Invocando shatter offline...");
-            
-            [iA, iB, iC, iD, iE, iF, iG, iH].forEach(icon => icon.classList.add('freeze'));
+            console.log("[PWA] Rede offline. Ativando blindagem e shatter...");
+            icons.forEach(icon => icon.classList.add('freeze'));
             await sleep(800);
-
-            [iA, iB, iC, iD, iE, iF, iG, iH].forEach(icon => icon.classList.add('shatter'));
+            icons.forEach(icon => icon.classList.add('shatter'));
             
-            iD.style.transform = 'translate(-260px, -140px) rotate(-135deg) scale(0.5)';
-            iA.style.transform = 'translate(260px, 160px) rotate(115deg) scale(0.5)';
-            iH.style.transform = 'translate(-140px, -290px) rotate(-70deg) scale(0.5)';
-            iC.style.transform = 'translate(210px, -260px) rotate(145deg) scale(0.5)';
-            iG.style.transform = 'translate(290px, -90px) rotate(65deg) scale(0.5)';
-            iE.style.transform = 'translate(-250px, 110px) rotate(-105deg) scale(0.5)';
-            iB.style.transform = 'translate(-110px, 290px) rotate(-165deg) scale(0.5)';
-            iF.style.transform = 'translate(140px, 240px) rotate(85deg) scale(0.5)';
+            // Shatter com direções aleatórias
+            icons[0].style.transform = 'translate(260px, 160px) rotate(115deg) scale(0.5)';
+            icons[1].style.transform = 'translate(-110px, 290px) rotate(-165deg) scale(0.5)';
+            icons[2].style.transform = 'translate(210px, -260px) rotate(145deg) scale(0.5)';
+            icons[3].style.transform = 'translate(-260px, -140px) rotate(-135deg) scale(0.5)';
+            icons[4].style.transform = 'translate(-250px, 110px) rotate(-105deg) scale(0.5)';
+            icons[5].style.transform = 'translate(140px, 240px) rotate(85deg) scale(0.5)';
+            icons[6].style.transform = 'translate(290px, -90px) rotate(65deg) scale(0.5)';
+            icons[7].style.transform = 'translate(-140px, -290px) rotate(-70deg) scale(0.5)';
 
             offlineAlert.classList.remove('hidden');
             await sleep(50);
             offlineAlert.classList.remove('opacity-0', 'scale-95');
             offlineAlert.classList.add('opacity-100', 'scale-100');
-            return; 
+            return; // Bloqueia a sequência online
         }
 
-        // --- ATO 5: A Implosão dos 8 Ícones ---
-        [iA, iB, iC, iD, iE, iF, iG, iH].forEach(icon => {
+        // --- ATO 5: Colapso Gravitacional (A Implosão Real) ---
+        console.log("[PWA] Conexão ativa. Iniciando Vórtice...");
+        icons.forEach(icon => {
             icon.style.transform = 'translate(0px, 0px) rotate(-180deg) scale(0)';
             icon.style.opacity = '0';
         });
         
-        // Sobreposição de tempo para não haver "corte seco"
-        await sleep(350); 
-
-        // --- ATO 6: A Revelação do Monolito e da Energia ---
-        if (glowContainer) {
-            glowContainer.classList.remove('hidden');
-            setTimeout(() => {
-                glowContainer.style.opacity = '1';
-                glowContainer.style.transform = 'scale(1)';
-            }, 50);
-        }
-
-        if (monolithBrand) {
-            monolithBrand.style.opacity = '1';
-            monolithBrand.style.transform = 'scale(1)';
-        }
-
         // Sincronização obrigatória: Espera o GAS carregar no fundo antes de prosseguir
         let timeoutCounter = 0;
         while (!iframeLoaded && timeoutCounter < 30) {
@@ -157,69 +146,79 @@ async function playOpeningSequence() {
             await sleep(500);
             timeoutCounter++;
         }
-        await sleep(1200); // Tempo para o usuário apreciar o design da marca
+        await sleep(350); // Exato momento em que os ícones colidiram
 
-        // --- ATO 7: Sobrecarga (O Gatilho) ---
+        // --- ATO 6: O Impacto e Revelação Flash (SESC iMESA BRASIL) ---
+        // O Bloco Flash surge na tela instantaneamente
+        monolithBrand.style.opacity = '1';
+        monolithBrand.style.transform = 'scale(1)';
+        
+        if (glowContainer) {
+            glowContainer.classList.remove('hidden');
+            setTimeout(() => {
+                glowContainer.style.opacity = '1';
+                glowContainer.style.transform = 'scale(1)';
+            }, 50);
+        }
+        await sleep(600); // Tempo curto de exposição do bloco flash (reto e limpo)
+
+        // --- ATO 7: Instabilidade Tecnológica (Gatilho do Arpão) ---
+        // A palavra iMESA entra em sobrecarga sutil
         if (imesaText) {
             imesaText.classList.add('animate-imesa-overload');
         }
-        await sleep(400);
+        await sleep(300);
 
-        // --- ATO 8: O VÓRTICE REVERSO (REVELAÇÃO DO GAS) ---
-        console.log("[PWA] Vórtice ativado. Rasgando o fundo...");
+        // --- ATO 8: A EXPANSÃO CENTRÍFUGA (O Arpão) ---
+        console.log("[PWA] Disparando o Arpão. Buscando o fundo...");
+        // As auras individuais correm para as bordas externas da tela
+        glows[0].style.transform = 'translate(-35vw, -35vh) scale(1.5)'; // Canto Superior Esq
+        glows[1].style.transform = 'translate(35vw, 35vh) scale(1.5)';   // Canto Inferior Dir
+        glows[2].style.transform = 'translate(-35vw, 35vh) scale(1.5)';  // Canto Inferior Esq
+        glows[3].style.transform = 'translate(35vw, -35vh) scale(1.5)';  // Canto Superior Dir
         
-        // Suga o Texto e a Nuvem de Energia para o marco zero
+        // Suga a Assinatura antes do vórtice
+        if (signature) signature.style.opacity = '0';
+        await sleep(500); // Tempo para as auras "pescarem" as bordas
+
+        // --- ATO 9: O VÓRTICE REVERSO (REVELAÇÃO DO GAS) ---
+        console.log("[PWA] Vórtice ativado. Rasgando o fundo...");
+        // As luzes voltam para o centro em alta velocidade, trazendo a cortina branca
+        glows.forEach(glow => {
+            glow.style.transform = 'translate(0px, 0px) scale(0)';
+            glow.style.opacity = '0';
+        });
+
+        // Suga o Texto Monolítico
         monolithBrand.style.transform = 'scale(0)';
         monolithBrand.style.opacity = '0';
         
-        glowContainer.style.transform = 'scale(0) rotate(540deg)';
-        glowContainer.style.opacity = '0';
+        // Efeito Elástico de impacto no fundo branco
+        loader.style.transition = 'transform 0.4s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.4s ease-in-out';
+        loader.style.transform = 'scale(0)';
+        loader.style.opacity = '0';
         
-        // Suga a Assinatura
-        if (signature) signature.style.opacity = '0';
+        await sleep(400); // Tempo exato do impacto e colapso do fundo branco
 
-        // O GRANDE TRUQUE: Deixa o fundo branco transparente, revelando o GAS imediatamente
-        loader.classList.remove('bg-slate-50');
-        loader.classList.add('bg-transparent');
-        
-        await sleep(300); // Exato momento em que tudo esmagou no centro
-
-        // --- ATO 9: O Selo Oficial do iMesa (Sobre o GAS) ---
-        // O Ícone "estoura" de dentro do vórtice, já com a interface escura ao fundo
-        officialIcon.style.opacity = '1';
-        officialIcon.style.transform = 'scale(1.15)';
-        await sleep(150); // Efeito de estilingue
-        officialIcon.style.transform = 'scale(1)';
-        
-        // Tempo que o ícone oficial reinará na tela dizendo "Estou pronto"
-        await sleep(750);
-
-        // --- ATO 10: Trabalho Feito ---
-        // O Ícone encolhe super rápido, limpando o palco
-        officialIcon.style.transition = 'transform 0.3s cubic-bezier(0.85, 0, 0.15, 1), opacity 0.3s ease-in-out';
-        officialIcon.style.transform = 'scale(0)';
-        officialIcon.style.opacity = '0';
-        
-        await sleep(300);
-
-        // Desliga a cortina invisível para liberar o toque na tela do GAS
+        // --- ATO 10: Fim da Cortina ---
+        // Desliga a cortina invisível para liberar o toque na interface do GAS
         loader.style.pointerEvents = 'none';
         loader.classList.add('hidden');
 
     } catch (error) {
-        console.error("Falha no motor lógico:", error);
+        console.error("Falha fatal na física do motor:", error);
         const loader = document.getElementById('loader-screen');
         if (loader) loader.style.display = 'none';
     }
 }
 
 // ==========================================
-// INFRAESTRUTURA DE INSTALAÇÃO
+// INFRAESTRUTURA NATIVA DO PWA
 // ==========================================
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('SW Operacional: ', reg.scope))
+            .then(reg => console.log('Blindagem offline ativa: ', reg.scope))
             .catch(err => console.log('Falha no SW: ', err));
     }
 }
@@ -237,7 +236,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
 window.installPWA = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`Resposta da instalação: ${outcome}`);
     deferredPrompt = null;
     const installBtn = document.getElementById('install-btn');
     if (installBtn) {
@@ -263,9 +263,7 @@ function checkIOS() {
     }
 }
 
-// ==========================================
-// PROXY DE REDIRECIONAMENTO DE HISTÓRICO
-// ==========================================
+// Histórico e Redirecionador (Proxy do GAS)
 window.addEventListener('DOMContentLoaded', () => {
     window.history.replaceState({ state: 'pwa_base' }, '');
     window.history.pushState({ state: 'pwa_active' }, '');
