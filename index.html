@@ -35,7 +35,7 @@
         }
     </script>
 </head>
-<body class="bg-slate-50 overflow-hidden font-sans text-slate-800 antialiased select-none w-screen h-screen m-0 p-0">
+<body class="bg-[#0f172a] overflow-hidden font-sans text-slate-800 antialiased select-none w-screen h-screen m-0 p-0">
 
     <iframe 
         id="gas-frame"
@@ -59,9 +59,9 @@
         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-r border-b border-slate-100"></div>
     </div>
 
-    <div id="loader-screen" class="absolute inset-0 w-full h-full bg-slate-50 z-50 flex items-center justify-center transition-all duration-[600ms] origin-center">
+    <div id="loader-screen" class="absolute inset-0 w-full h-full bg-slate-50 z-50 flex items-center justify-center origin-center overflow-hidden">
         
-        <div class="relative flex items-center justify-center w-[400px] h-[400px] md:scale-110 transform transition-transform duration-700 select-none">
+        <div class="relative flex items-center justify-center w-[400px] h-[400px] md:scale-110 transform select-none">
             
             <div id="icon-A" class="actor absolute w-12 h-12 bg-blue-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
                 <i data-lucide="smartphone" class="text-white w-6 h-6"></i>
@@ -88,29 +88,22 @@
                 <i data-lucide="settings" class="text-white w-6 h-6"></i>
             </div>
 
-            <div id="glow-container" class="absolute w-[450px] h-[450px] flex items-center justify-center pointer-events-none opacity-0 scale-50 transition-all duration-[800ms] z-10">
-                <div class="absolute w-40 h-40 rounded-full bg-blue-500/35 blur-3xl transform translate-x-[-40px] translate-y-[-40px]"></div>
-                <div class="absolute w-40 h-40 rounded-full bg-fuchsia-500/35 blur-3xl transform translate-x-[40px] translate-y-[40px]"></div>
-                <div class="absolute w-40 h-40 rounded-full bg-emerald-500/35 blur-3xl transform translate-x-[-40px] translate-y-[40px]"></div>
-                <div class="absolute w-40 h-40 rounded-full bg-amber-500/35 blur-3xl transform translate-x-[40px] translate-y-[-40px]"></div>
+            <div id="glow-container" class="absolute w-full h-full flex items-center justify-center pointer-events-none opacity-0 scale-50 z-10 transition-opacity duration-300">
+                <div id="glow-1" class="absolute w-44 h-44 rounded-full bg-blue-500/40 blur-3xl transform translate-x-[-20px] translate-y-[-20px] transition-transform duration-[600ms] ease-out"></div>
+                <div id="glow-2" class="absolute w-44 h-44 rounded-full bg-fuchsia-500/40 blur-3xl transform translate-x-[20px] translate-y-[20px] transition-transform duration-[600ms] ease-out"></div>
+                <div id="glow-3" class="absolute w-44 h-44 rounded-full bg-emerald-500/40 blur-3xl transform translate-x-[-20px] translate-y-[20px] transition-transform duration-[600ms] ease-out"></div>
+                <div id="glow-4" class="absolute w-44 h-44 rounded-full bg-amber-500/40 blur-3xl transform translate-x-[20px] translate-y-[-20px] transition-transform duration-[600ms] ease-out"></div>
             </div>
 
-            <div id="monolith-brand" class="absolute flex flex-col items-center justify-center opacity-0 scale-95 transition-all duration-500 z-30 pointer-events-none w-full">
-                <span id="mono-sesc" class="font-montserrat font-extrabold text-[#020f3d]/15 text-6xl md:text-7xl tracking-widest uppercase transition-all duration-500 select-none pb-2">Sesc</span>
+            <div id="monolith-brand" class="absolute flex flex-col items-center justify-center opacity-0 scale-90 z-30 pointer-events-none w-full transition-transform duration-[400ms] ease-out">
+                <span id="mono-sesc" class="font-montserrat font-extrabold text-[#020f3d]/15 text-6xl md:text-7xl tracking-widest uppercase select-none pb-2">Sesc</span>
                 
-                <div id="mono-imesa-text" class="font-montserrat text-[#020f3d] text-5xl md:text-6xl flex items-baseline justify-center tracking-tight transition-all duration-300">
+                <div id="mono-imesa-text" class="font-montserrat text-[#020f3d] text-5xl md:text-6xl flex items-baseline justify-center tracking-tight">
                     <span id="mono-i" class="font-normal animate-i-glitch">i</span>
                     <span id="mono-mesa" class="font-extrabold">MESA</span>
                 </div>
 
-                <span id="mono-brasil" class="font-montserrat font-extrabold text-[#020f3d]/15 text-5xl md:text-6xl tracking-[0.18em] uppercase transition-all duration-500 select-none pt-2">Brasil</span>
-            </div>
-
-            <div id="official-icon-card" class="absolute w-24 h-24 bg-[#020f3d] rounded-3xl flex items-center justify-center font-montserrat text-4xl text-white opacity-0 scale-0 shadow-2xl transition-all duration-500 z-40">
-                <div class="flex items-baseline justify-center select-none">
-                    <span id="card-i" class="font-normal animate-i-glitch text-white">i</span>
-                    <span id="card-M" class="font-extrabold text-white ml-[0.5px]">M</span>
-                </div>
+                <span id="mono-brasil" class="font-montserrat font-extrabold text-[#020f3d]/15 text-5xl md:text-6xl tracking-[0.18em] uppercase select-none pt-2">Brasil</span>
             </div>
 
         </div>
