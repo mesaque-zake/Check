@@ -39,7 +39,7 @@ async function playOpeningSequence() {
         if (signature) { signature.classList.remove('opacity-0'); signature.classList.add('opacity-100'); }
         await sleep(400);
 
-        // ATO 3: B e C (Quadrado)
+        // ATO 3: B e C
         icons[1].style.opacity = '1'; icons[1].style.transform = 'translate(-30px, 30px) scale(1)';
         icons[2].style.opacity = '1'; icons[2].style.transform = 'translate(30px, -30px) scale(1)';
         icons[3].style.transform = 'translate(-30px, -30px) scale(1)';
@@ -90,7 +90,6 @@ async function playOpeningSequence() {
 
         await sleep(300);
 
-        // Transformação em Auras
         const auraColors = [
             { core: 'rgba(96, 165, 250, 0.6)', outer: 'rgba(147, 197, 253, 0.25)' },
             { core: 'rgba(52, 211, 153, 0.6)', outer: 'rgba(110, 231, 183, 0.25)' },
@@ -102,9 +101,9 @@ async function playOpeningSequence() {
             { core: 'rgba(192, 132, 252, 0.6)', outer: 'rgba(216, 180, 254, 0.25)' }
         ];
 
+        // Sem destruir o DOM (innerHTML), apenas manipulamos as classes para performance de GPU
         icons.forEach((icon, index) => {
-            icon.innerHTML = ''; 
-            icon.className = 'absolute z-20 aura-mode'; 
+            icon.className = 'absolute z-20 flex items-center justify-center aura-mode'; 
             icon.style.setProperty('--aura-core', auraColors[index].core);
             icon.style.setProperty('--aura', auraColors[index].outer);
         });
@@ -142,7 +141,7 @@ async function playOpeningSequence() {
 
         await sleep(1800);
 
-        // Verifica se o GAS carregou antes do final épico
+        // Verifica se o GAS carregou
         let timeoutCounter = 0;
         while (!iframeLoaded && timeoutCounter < 30) {
             await sleep(500);
@@ -150,11 +149,9 @@ async function playOpeningSequence() {
         }
 
         // ATO 8: IMPLOSÃO OFICIAL (O SNAP)
-        // O fundo branco da tela dissolve para revelar o iFrame
         loader.style.transition = 'background-color 0.4s ease-out';
         loader.style.backgroundColor = 'transparent';
 
-        // Enquanto o iframe aparece no fundo, as auras e logo sofrem a implosão VISUAL
         icons.forEach(icon => {
             icon.style.transition = 'transform 0.5s cubic-bezier(0.9, 0, 0.1, 1)';
             icon.style.transform = 'translate(0px, 0px) scale(0)';
@@ -175,7 +172,7 @@ async function playOpeningSequence() {
     }
 }
 
-// INSTALAÇÃO DO PWA E SW
+// INSTALAÇÃO DO PWA E SW (MANTIDO INTACTO)
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW Erro: ', err));
