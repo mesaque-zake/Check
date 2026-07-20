@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sesc iMesa Brasil</title>
 
-    <meta property="og:title" content="iMesa!">
+    <!-- OTIMIZAÇÃO DE OPEN GRAPH (COMPARTILHAMENTO) -->
+    <meta property="og:title" content="iMesa! Ecossistema Operacional">
     <meta property="og:description" content="Acesse o Ecossistema Operacional do Sesc Mesa Brasil - Unidade Itaquera">
-    <!-- ATENÇÃO: Substitua a URL abaixo pelo link real do seu GitHub Pages para a imagem aparecer no Zap/Teams -->
-    <meta property="og:image" content="https://SEU-USUARIO.github.io/SEU-REPOSITORIO/assets/Share.png">
+    <meta property="og:image" content="https://raw.githubusercontent.com/mesaque-zake/iMesa/refs/heads/main/assets/Share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://mesaque-zake.github.io/iMesa/">
     <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#f8fafc">
-    <link rel="icon" type="image/png" href="assets/Favicon.png">
-    <link rel="apple-touch-icon" href="assets/Icon180.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mesaque-zake/iMesa/refs/heads/main/assets/Favicon.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/mesaque-zake/iMesa/refs/heads/main/assets/Icon180.png">
 
+    <!-- FONTES E ÍCONES EXTERNOS -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Montserrat:wght@400;800;900&family=Abril+Fatface&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -35,15 +40,108 @@
             }
         }
     </script>
-</head>
-<body class="bg-[#0f172a] overflow-hidden font-sans text-slate-800 antialiased select-none w-screen h-screen m-0 p-0">
 
-    <!-- iFrame com "Cofre Aberto" para todas as permissões do GAS -->
+    <style>
+        :root {
+            --navy-blue: #1e3a8a; 
+            --navy-blue-trans: rgba(30, 58, 138, 0.15); 
+        }
+
+        body, html {
+            -webkit-tap-highlight-color: transparent;
+            overflow: hidden;
+            background-color: #0f172a;
+        }
+
+        /* --- ANIMAÇÕES GEOMÉTRICAS --- */
+        .actor {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        opacity 0.3s ease-in-out;
+        }
+
+        .freeze {
+            filter: grayscale(100%) brightness(50%) !important;
+            opacity: 0.35 !important;
+            transition: filter 0.8s ease-in-out, opacity 0.8s ease-in-out !important;
+        }
+
+        /* --- AQUARELA NO FUNDO CLARO (AURAS) --- */
+        .aura-mode {
+            width: 0px !important;
+            height: 0px !important;
+            background-color: transparent !important;
+            /* Box shadow ultra denso e blur forte para efeito de fumaça */
+            box-shadow: 0 0 50px 25px var(--aura-core), 0 0 150px 80px var(--aura-shadow) !important; 
+            border-radius: 50% !important;
+            border: none !important;
+            /* MULTIPLY: O segredo para fundos claros. Cria mistura subtrativa brilhante (aquarela) sem lama */
+            mix-blend-mode: multiply; 
+            filter: blur(10px);
+            opacity: 0.9;
+        }
+
+        /* Magia de GPU para esconder o conteúdo sem matar o elemento no DOM */
+        .aura-mode > * {
+            opacity: 0 !important;
+            transform: scale(0) !important;
+            transition: opacity 0.1s ease-out, transform 0.1s ease-out !important;
+        }
+
+        /* --- BURADO NEGRO (O GRAN FINALE) --- */
+        #loader-screen {
+            clip-path: circle(150% at 50% 50%); /* Preparado para implodir */
+        }
+
+        /* --- LOGO OFICIAL --- */
+        .logo-wrapper {
+            font-size: clamp(14px, 2.5vw, 32px); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.15em;
+            transform: scale(0);
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .text-sesc, .text-brasil {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--navy-blue-trans);
+            line-height: 0.8;
+        }
+        .text-sesc { font-size: 3.6em; letter-spacing: 0.05em; }
+        .text-brasil { font-size: 2.5em; letter-spacing: 0.02em; }
+
+        .text-imesa {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--navy-blue);
+            display: flex;
+            align-items: baseline;
+            line-height: 0.8;
+        }
+        .text-imesa .mesa { font-size: 2.8em; letter-spacing: -0.02em; }
+        .text-i {
+            font-family: 'Abril Fatface', serif;
+            font-style: italic;
+            color: var(--navy-blue);
+            font-size: 2.2em;
+            text-shadow: 0.04em 0 0 rgba(0, 255, 255, 0.6), -0.04em -0.02em 0 rgba(255, 0, 255, 0.6);
+            margin-right: 0.15em; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 overflow-hidden font-sans text-slate-800 antialiased select-none w-screen h-screen m-0 p-0">
+
+    <!-- IFRAME COM PODERES NATIVOS (Sandbox e Permissões Full) -->
     <iframe 
         id="gas-frame"
-        src="https://script.google.com/macros/s/AKfycbwhpn3mgIIJ5I83uMoC2wT3c87UAo0hJEzu1XjwsNZy-8Cyi-3ircgUF0v9wn8gugmJ/exec" 
+        src="https://script.google.com/macros/s/AKfycbwqH_39LNMF3UorGX_s_FogN8qKz8aCdL2PbzMXHnshFO80ucoHrAkVJyzHlf48f_54/exec" 
         class="absolute inset-0 w-full h-full border-none z-0"
-        allow="geolocation *; clipboard-write *; clipboard-read *; camera *; microphone *; fullscreen *; display-capture *">
+        allow="camera; microphone; geolocation; clipboard-read; clipboard-write; display-capture; fullscreen"
+        sandbox="allow-downloads allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin allow-forms allow-top-navigation">
     </iframe>
 
     <button id="install-btn" onclick="installPWA()" class="absolute bottom-6 right-6 md:bottom-10 md:right-10 bg-slate-800 hover:bg-slate-700 text-white px-5 py-3 rounded-full shadow-2xl flex items-center gap-2 z-40 hidden opacity-0 translate-y-10 transition-all duration-500">
@@ -61,61 +159,37 @@
         <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-r border-b border-slate-100"></div>
     </div>
 
-    <!-- TELA DE CARREGAMENTO -->
-    <div id="loader-screen" class="absolute inset-0 w-full h-full bg-[#0f172a] z-50 flex items-center justify-center origin-center overflow-hidden transition-transform duration-700 ease-in-out">
+    <!-- TELA DE CARREGAMENTO & PALCO DA DANÇA -->
+    <div id="loader-screen" class="absolute inset-0 w-full h-full bg-slate-50 z-50 flex items-center justify-center origin-center overflow-hidden">
 
         <div class="relative flex items-center justify-center w-[400px] h-[400px] md:scale-110 transform select-none">
             
-            <!-- Logo do Sesc -->
             <div id="logo-wrapper" class="logo-wrapper absolute z-30 pointer-events-none select-none">
                 <span class="text-sesc">SESC</span>
-                <div class="text-imesa">
-                    <span class="text-i">i</span>
-                    <span class="mesa">MESA</span>
-                </div>
+                <div class="text-imesa"><span class="text-i">i</span><span class="mesa">MESA</span></div>
                 <span class="text-brasil">BRASIL</span>
             </div>
 
-            <!-- Ícones (Os 10 Dançarinos) -->
-            <div id="icon-A" class="actor absolute w-12 h-12 bg-blue-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="smartphone" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-B" class="actor absolute w-12 h-12 bg-emerald-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="droplets" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-C" class="actor absolute w-12 h-12 bg-amber-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="bar-chart-3" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-H" class="actor absolute w-12 h-12 bg-red-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="file-text" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-D" class="actor absolute w-12 h-12 bg-fuchsia-800 rounded-2xl shadow-lg flex items-center justify-center z-20 font-dancing opacity-0 scale-0">
-                <span class="text-white text-xl font-bold leading-none mt-1">W</span>
-            </div>
-            <div id="icon-E" class="actor absolute w-12 h-12 bg-orange-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="receipt" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-F" class="actor absolute w-12 h-12 bg-rose-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="gamepad-2" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-G" class="actor absolute w-12 h-12 bg-slate-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="settings" class="text-white w-6 h-6"></i>
-            </div>
+            <!-- OS 10 ATORES (ÍCONES) -->
+            <div id="icon-A" class="actor absolute w-12 h-12 bg-blue-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="smartphone" class="text-white w-6 h-6"></i></div>
+            <div id="icon-B" class="actor absolute w-12 h-12 bg-emerald-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="droplets" class="text-white w-6 h-6"></i></div>
+            <div id="icon-C" class="actor absolute w-12 h-12 bg-amber-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="bar-chart-3" class="text-white w-6 h-6"></i></div>
+            <div id="icon-D" class="actor absolute w-12 h-12 bg-fuchsia-800 rounded-2xl shadow-lg flex items-center justify-center z-20 font-dancing opacity-0 scale-0"><span class="text-white text-xl font-bold leading-none mt-1">W</span></div>
+            <div id="icon-E" class="actor absolute w-12 h-12 bg-orange-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="receipt" class="text-white w-6 h-6"></i></div>
+            <div id="icon-F" class="actor absolute w-12 h-12 bg-rose-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="gamepad-2" class="text-white w-6 h-6"></i></div>
+            <div id="icon-G" class="actor absolute w-12 h-12 bg-slate-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="settings" class="text-white w-6 h-6"></i></div>
+            <div id="icon-H" class="actor absolute w-12 h-12 bg-red-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i data-lucide="file-text" class="text-white w-6 h-6"></i></div>
             
-            <!-- NOVOS: Guia e Manual -->
-            <div id="icon-I" class="actor absolute w-12 h-12 bg-cyan-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="leaf" class="text-white w-6 h-6"></i>
-            </div>
-            <div id="icon-J" class="actor absolute w-12 h-12 bg-violet-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0">
-                <i data-lucide="library" class="text-white w-6 h-6"></i>
-            </div>
+            <!-- NOVOS ATORES (TABLER ICONS) -->
+            <div id="icon-I" class="actor absolute w-12 h-12 bg-cyan-500 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i class="ti ti-leaf text-white text-2xl"></i></div>
+            <div id="icon-J" class="actor absolute w-12 h-12 bg-violet-600 rounded-2xl shadow-lg flex items-center justify-center z-20 opacity-0 scale-0"><i class="ti ti-books text-white text-2xl"></i></div>
 
         </div>
 
         <div id="offline-alert" class="absolute flex flex-col items-center justify-center opacity-0 scale-95 transform transition-all duration-500 hidden z-50">
             <i data-lucide="wifi-off" class="text-slate-400 w-12 h-12 mb-3"></i>
-            <span class="text-xl font-montserrat font-800 text-slate-700 mb-4 tracking-tight">Sem Conexão</span>
-            <button onclick="window.location.reload()" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full shadow-md transition-all active:scale-95 focus:outline-none text-sm tracking-wide">
+            <span class="text-xl font-montserrat font-black text-slate-700 mb-4 tracking-tight">Sem Conexão</span>
+            <button onclick="window.location.reload()" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-full shadow-lg transition-all active:scale-95 focus:outline-none text-sm tracking-wide">
                 Tentar Novamente
             </button>
         </div>
@@ -127,6 +201,238 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        let iframeLoaded = false;
+        let deferredPrompt = null;
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const iframe = document.getElementById('gas-frame');
+            if (iframe) {
+                iframe.addEventListener('load', () => {
+                    console.log("[PWA] GAS carregado no fundo.");
+                    iframeLoaded = true;
+                });
+            }
+        });
+
+        // ==========================================
+        // A DANÇA DOS 10 ÍCONES (ESPETÁCULO GEOMÉTRICO)
+        // ==========================================
+        async function playOpeningSequence() {
+            try {
+                lucide.createIcons();
+
+                const icons = Array.from({length: 10}, (_, i) => document.getElementById(`icon-${String.fromCharCode(65+i)}`));
+                const logo = document.getElementById('logo-wrapper');
+                const loader = document.getElementById('loader-screen');
+                const offlineAlert = document.getElementById('offline-alert');
+                const signature = document.getElementById('signature');
+
+                // Helper para injetar transições dinâmicas
+                const setTransition = (duration, ease) => icons.forEach(i => i.style.transition = `transform ${duration}s ${ease}, opacity ${duration}s ease`);
+
+                // 1 - A Semente (Dashboard) [0.0s]
+                icons[2].style.opacity = '1'; icons[2].style.transform = 'translate(0px, 0px) scale(1)';
+                await sleep(300);
+
+                // 2 - A Dupla (Dashboard, Aparelhos) [0.3s]
+                setTransition(0.3, 'cubic-bezier(0.34, 1.56, 0.64, 1)');
+                icons[2].style.transform = 'translate(-40px, 0px) scale(1)';
+                icons[0].style.opacity = '1'; icons[0].style.transform = 'translate(40px, 0px) scale(1)';
+                if (signature) { signature.classList.remove('opacity-0'); signature.classList.add('opacity-100'); }
+                await sleep(300);
+
+                // 3 - O Quadrado (add Lavagem, Relatórios) [0.6s]
+                icons[2].style.transform = 'translate(-40px, -40px) scale(1)';
+                icons[0].style.transform = 'translate(40px, -40px) scale(1)';
+                icons[1].style.opacity = '1'; icons[1].style.transform = 'translate(-40px, 40px) scale(1)';
+                icons[7].style.opacity = '1'; icons[7].style.transform = 'translate(40px, 40px) scale(1)';
+                await sleep(300);
+
+                // 4 - O Hexágono (add Ways, Admin) [0.9s]
+                icons[2].style.transform = 'translate(-60px, -30px) scale(1)';
+                icons[0].style.transform = 'translate(60px, -30px) scale(1)';
+                icons[1].style.transform = 'translate(-60px, 30px) scale(1)';
+                icons[7].style.transform = 'translate(60px, 30px) scale(1)';
+                icons[3].style.opacity = '1'; icons[3].style.transform = 'translate(0px, -70px) scale(1)';
+                icons[6].style.opacity = '1'; icons[6].style.transform = 'translate(0px, 70px) scale(1)';
+                await sleep(300);
+
+                // 4.1 - O Losango Estendido (add Reembolso, Games) [1.2s]
+                icons[2].style.transform = 'translate(-50px, -50px) scale(1)';
+                icons[0].style.transform = 'translate(50px, -50px) scale(1)';
+                icons[1].style.transform = 'translate(-50px, 50px) scale(1)';
+                icons[7].style.transform = 'translate(50px, 50px) scale(1)';
+                icons[3].style.transform = 'translate(0px, -90px) scale(1)';
+                icons[6].style.transform = 'translate(0px, 90px) scale(1)';
+                icons[4].style.opacity = '1'; icons[4].style.transform = 'translate(-90px, 0px) scale(1)';
+                icons[5].style.opacity = '1'; icons[5].style.transform = 'translate(90px, 0px) scale(1)';
+                await sleep(300);
+
+                // 5 - A Coroa (add Guia, Manual e forma anel) [1.5s]
+                const radius = 100;
+                const coords = [];
+                // Calcula as posições perfeitas para os 10 ícones no anel
+                for(let i = 0; i < 10; i++) {
+                    const angle = (i * 36 - 90) * (Math.PI / 180);
+                    coords.push({x: radius * Math.cos(angle), y: radius * Math.sin(angle)});
+                }
+                icons.forEach((icon, i) => {
+                    icon.style.opacity = '1';
+                    icon.style.transform = `translate(${coords[i].x}px, ${coords[i].y}px) scale(1)`;
+                });
+                await sleep(350); // Total até aqui ~1.85s
+
+                // MODO OFFLINE (Cacos no Chão)
+                if (!navigator.onLine) {
+                    icons.forEach(icon => icon.classList.add('freeze'));
+                    await sleep(300);
+                    setTransition(0.6, 'cubic-bezier(0.25, 1, 0.5, 1)');
+                    icons.forEach((icon, i) => {
+                        const randomX = (Math.random() - 0.5) * 400;
+                        const randomRot = Math.random() * 360 - 180;
+                        icon.style.transform = `translate(${randomX}px, 300px) rotate(${randomRot}deg) scale(0.5)`;
+                    });
+                    offlineAlert.classList.remove('hidden');
+                    await sleep(50);
+                    offlineAlert.classList.remove('opacity-0', 'scale-95');
+                    offlineAlert.classList.add('opacity-100', 'scale-100');
+                    return; 
+                }
+
+                // 6 - Implosão Primária (Colisão) [~2.0s]
+                setTransition(0.3, 'ease-in');
+                icons.forEach(icon => icon.style.transform = 'translate(0px, 0px) scale(0.1)');
+                if (signature) { signature.style.transition = 'opacity 0.2s'; signature.style.opacity = '0'; }
+                await sleep(300); 
+
+                // Configuração RGB Exata para as Auras (Adaptadas para MULTIPLY em fundo branco)
+                const auraColors = [
+                    { core: 'rgba(37, 99, 235, 0.5)', shadow: 'rgba(59, 130, 246, 0.2)' },  // A: Aparelhos (Azul)
+                    { core: 'rgba(5, 150, 105, 0.5)', shadow: 'rgba(16, 185, 129, 0.2)' },  // B: Lavagem (Esmeralda)
+                    { core: 'rgba(245, 158, 11, 0.5)', shadow: 'rgba(251, 191, 36, 0.2)' }, // C: Dashboard (Âmbar)
+                    { core: 'rgba(134, 25, 143, 0.5)', shadow: 'rgba(192, 38, 211, 0.2)' }, // D: Ways (Fúcsia)
+                    { core: 'rgba(249, 115, 22, 0.5)', shadow: 'rgba(251, 146, 60, 0.2)' }, // E: Reembolso (Laranja)
+                    { core: 'rgba(225, 29, 72, 0.5)', shadow: 'rgba(244, 63, 94, 0.2)' },   // F: Games (Rosa)
+                    { core: 'rgba(100, 116, 139, 0.5)', shadow: 'rgba(148, 163, 184, 0.2)' },// G: Admin (Ardósia)
+                    { core: 'rgba(220, 38, 38, 0.5)', shadow: 'rgba(248, 113, 113, 0.2)' }, // H: Relatórios (Vermelho)
+                    { core: 'rgba(6, 182, 212, 0.5)', shadow: 'rgba(34, 211, 238, 0.2)' },  // I: Guia (Ciano)
+                    { core: 'rgba(124, 58, 237, 0.5)', shadow: 'rgba(139, 92, 246, 0.2)' }  // J: Manual (Violeta)
+                ];
+
+                icons.forEach((icon, index) => {
+                    icon.className = 'absolute z-20 flex items-center justify-center aura-mode'; 
+                    icon.style.setProperty('--aura-core', auraColors[index].core);
+                    icon.style.setProperty('--aura-shadow', auraColors[index].shadow);
+                });
+                await sleep(50); 
+
+                // 7 - O Reveal e a Aquarela [~2.35s]
+                logo.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s';
+                logo.style.transform = 'scale(1)'; 
+                logo.style.opacity = '1';
+
+                setTransition(2.0, 'cubic-bezier(0.25, 1, 0.5, 1)'); 
+                
+                icons.forEach((icon, i) => {
+                    // Explodem para fora do logo, concentrando nas bordas para deixar o centro livre
+                    const angle = (i * 36 - 90 + (Math.random() * 20 - 10)) * (Math.PI / 180);
+                    const r = 140 + Math.random() * 50; 
+                    const scale = 2.0 + Math.random() * 1.5;
+                    icon.style.transform = `translate(${r * Math.cos(angle)}px, ${r * Math.sin(angle)}px) scale(${scale})`;
+                });
+                await sleep(1500); // Flutuando... [~3.85s]
+
+                // Proteção: Espera o GAS no máximo 3 segundos a mais se a net estiver lenta
+                let timeout = 0;
+                while (!iframeLoaded && timeout < 30) { await sleep(100); timeout++; }
+
+                // 8 - O Gran Finale (O Buraco Negro sugando tudo) [~4.0s]
+                // Auras puxam rápido
+                setTransition(0.4, 'cubic-bezier(0.9, 0, 0.1, 1)');
+                icons.forEach(icon => {
+                    icon.style.transform = 'translate(0px, 0px) scale(0)';
+                });
+                
+                logo.style.transition = 'transform 0.4s cubic-bezier(0.9, 0, 0.1, 1), opacity 0.3s';
+                logo.style.transform = 'scale(0)';
+                
+                // Fundo colapsa no centro revelando o GAS limpo
+                loader.style.transition = 'clip-path 0.5s cubic-bezier(0.9, 0, 0.1, 1)';
+                await sleep(50);
+                loader.style.clipPath = 'circle(0% at 50% 50%)';
+
+                await sleep(450); // [~4.5s Total]
+                loader.classList.add('hidden');
+                loader.style.pointerEvents = 'none';
+
+            } catch (error) {
+                console.error("Erro na Dança:", error);
+                document.getElementById('loader-screen').style.display = 'none';
+            }
+        }
+
+        // ==========================================
+        // INFRAESTRUTURA DO APP & ROTAS NATIVAS
+        // ==========================================
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW Erro: ', err));
+            }
+        }
+
+        // Navegação nativa que não fecha o PWA (Comunicação com Iframe)
+        window.addEventListener('DOMContentLoaded', () => { 
+            window.history.replaceState({ state: 'pwa_base' }, ''); 
+            window.history.pushState({ state: 'pwa_active' }, ''); 
+        });
+        
+        window.addEventListener('popstate', () => {
+            const iframe = document.getElementById('gas-frame');
+            if (iframe && iframe.contentWindow) iframe.contentWindow.postMessage({ action: 'back' }, '*');
+            window.history.pushState({ state: 'pwa_active' }, '');
+        });
+
+        window.addEventListener('message', (event) => { 
+            if (event.data && event.data.action === 'exit_app') window.close(); 
+        });
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault(); deferredPrompt = e;
+            const installBtn = document.getElementById('install-btn');
+            if (installBtn) {
+                installBtn.classList.remove('hidden');
+                setTimeout(() => installBtn.classList.remove('opacity-0', 'translate-y-10'), 50);
+            }
+        });
+
+        window.installPWA = async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null;
+            const installBtn = document.getElementById('install-btn');
+            if (installBtn) {
+                installBtn.classList.add('opacity-0', 'translate-y-10');
+                setTimeout(() => installBtn.classList.add('hidden'), 300);
+            }
+        };
+
+        function checkIOS() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+            if (isIOS && !isStandalone) {
+                const iosPrompt = document.getElementById('ios-prompt');
+                if (iosPrompt) {
+                    iosPrompt.classList.remove('hidden'); setTimeout(() => iosPrompt.classList.remove('opacity-0', 'translate-y-10'), 50);
+                    setTimeout(() => { iosPrompt.classList.add('opacity-0', 'translate-y-10'); setTimeout(() => iosPrompt.classList.add('hidden'), 300); }, 10000);
+                }
+            }
+        }
+
+        // Disparo do Motor Principal
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => { playOpeningSequence(); registerServiceWorker(); checkIOS(); }, 100);
+        });
+    </script>
 </body>
 </html>
